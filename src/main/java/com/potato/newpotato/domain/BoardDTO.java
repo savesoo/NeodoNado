@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class PotatoBoardDTO {
+public class BoardDTO {
 
     private long boardid;
     private String userid;

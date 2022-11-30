@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class PotatoUserDTO {
+public class UserDTO {
 
     private String userid;
     private String password;
@@ -18,5 +18,13 @@ public class PotatoUserDTO {
     private String loc;
     private String nickname;
     private boolean deleteuser;
+
+    public UserDTO loginData(){
+
+        return UserDTO.builder()
+                .userid(this.getUserid())
+                .password(this.getPassword())
+                .build();
+    }
 
 }
