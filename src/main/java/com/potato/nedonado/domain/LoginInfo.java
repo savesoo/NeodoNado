@@ -10,12 +10,13 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
-public class LoginData {
+public class LoginInfo {
 
-    private String userid;
-    private LocalDate joindate;
-    private String loc;
+    private String userId;
+    private String uuid;
+    private LocalDate joinDate;
+    private String location;
     private String nickname;
-    private boolean deleteuser;
+    private boolean deleted;
 
 }

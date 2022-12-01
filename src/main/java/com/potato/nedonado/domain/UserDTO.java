@@ -12,18 +12,24 @@ import java.time.LocalDate;
 @Builder
 public class UserDTO {
 
-    private String userid;
-    private String password;
-    private LocalDate joindate;
-    private String loc;
+    private long userIdx;
+    private String uuid;
+    private String userId;
+    private String userPw;
+    private LocalDate joinDate;
+    private String location;
     private String nickname;
-    private boolean deleteuser;
+    private boolean deleted;
 
-    public UserDTO loginData(){
+    public LoginInfo loginData(){
 
-        return UserDTO.builder()
-                .userid(this.getUserid())
-                .password(this.getPassword())
+        return LoginInfo.builder()
+                .uuid(uuid)
+                .userId(userId)
+                .joinDate(joinDate)
+                .nickname(nickname)
+                .location(location)
+                .deleted(deleted)
                 .build();
     }
 
