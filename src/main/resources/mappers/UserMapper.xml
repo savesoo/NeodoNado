@@ -31,4 +31,19 @@
     </delete>
 
 
+
+    <!-- uuid로 회원 조회 -->
+    <select id="selectUserByUUID"
+            parameterType="com.potato.nedonado.model.user.UserDTO"
+            resultType="com.potato.nedonado.model.user.UserDTO">
+        select * from user where uuid=#{uuid}
+    </select>
+
+
+    <!-- uuid 갱신 -->
+    <update id="updateUUIDtoUser" parameterType="com.potato.nedonado.model.user.UserDTO">
+        update user set uuid=#{uuid} where userId=#{userId}
+    </update>
+
+
 </mapper>

@@ -21,8 +21,15 @@ public interface UserMapper {
     // 탈퇴 처리
     int deleteUser(UserDTO userDTO);
 
+
     
 
+    // user select by uuid
+    UserDTO selectUserByUUID(String uuid);
+
+
+    // uuid 갱신
+    int updateUUIDtoUser(UserDTO userDTO);
 
 
 }

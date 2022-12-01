@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>회원 가입</title>
@@ -26,18 +27,18 @@
             </tr>
             <tr>
                 <td>닉네임 </td>
-                <td><input type="text" name="nickName"></td>
+                <td><input type="text" name="nickname"></td>
             </tr>
             <tr>
                 <td>거주 지역 </td>
-                <td><input type="text" name="loc"></td>
+                <td><input type="text" name="location"></td>
             </tr>
             <tr>
                 <td>생일 </td>
                 <td>
-                    <input type="text" name="bYear" placeholder="년도">
-                    <input type="text" name="bMonth" placeholder="월">
-                    <input type="text" name="bDay" placeholder="날짜">
+                    <input type="number" name="bYear" placeholder="년도">
+                    <input type="number" name="bMonth" placeholder="월">
+                    <input type="number" name="bDay" placeholder="날짜">
                 </td>
             </tr>
             <tr>
