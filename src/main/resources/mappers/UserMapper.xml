@@ -2,8 +2,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.apache.ibatis.submitted.rounding.Mapper">
+<mapper namespace="com.potato.nedonado.mapper.UserMapper">
+
     <select id="getTime" resultType="string">
         select now()
     </select>
+
+    <!-- 가입 -->
+    <insert id="insertUser" parameterType="com.potato.nedonado.model.user.UserDTO">
+        insert into user (userId, userPw, joinDate, location, nickname) values (#{userId}, #{userPw}, #{joinDate}, #{location}, #{nickname})
+    </insert>
+
+    <!-- 로그인시 조회 -->
+    <select id="selectByIdAndPw"
+            parameterType="com.potato.nedonado.model.user.UserDTO"
+            resultType="com.potato.nedonado.model.user.UserDTO">
+        select * from user where userId=#{userId} and userPw=#{userPw}
+    </select>
+
+    <!-- 정보 수정 -->
+    <update id="editUserInfo" parameterType="com.potato.nedonado.model.user.UserDTO">
+        update user set location=#{location}, nickname=#{nickname}, bYear=#{bYear}, bMonth=#{bMonth}, bDay=#{bDay} where userId=#{userId}
+    </update>
+
+    <!-- 회원 탈퇴 -->
+    <delete id="deleteUser" parameterType="com.potato.nedonado.model.user.UserDTO">
+        delete from user where userId=#{userId}
+    </delete>
+
+
 </mapper>

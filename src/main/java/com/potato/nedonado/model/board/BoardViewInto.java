@@ -1,4 +1,4 @@
-package com.potato.nedonado.domain.board;
+package com.potato.nedonado.model.board;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.*;

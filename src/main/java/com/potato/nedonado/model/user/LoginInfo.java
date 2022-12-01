@@ -1,4 +1,4 @@
-package com.potato.nedonado.domain;
+package com.potato.nedonado.model.user;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ public class LoginInfo {
 
     private String userId;
     private String uuid;
-    private LocalDate joinDate;
+    private long joinDate;
     private String location;
     private String nickname;
     private boolean deleted;

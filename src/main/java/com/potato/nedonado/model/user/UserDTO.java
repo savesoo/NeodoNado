@@ -1,8 +1,6 @@
-package com.potato.nedonado.domain;
+package com.potato.nedonado.model.user;
 
 import lombok.*;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,11 +12,20 @@ public class UserDTO {
 
     private long userIdx;
     private String uuid;
+
     private String userId;
     private String userPw;
-    private LocalDate joinDate;
-    private String location;
+
     private String nickname;
+    private String nation;
+    private String phone;
+
+    private String location;
+    private int bYear;
+    private int bMonth;
+    private int bDay;
+
+    private long joinDate;
     private boolean deleted;
 
     public LoginInfo loginData(){

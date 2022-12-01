@@ -16,11 +16,11 @@
             <AppenderRef ref = "Console"/>
         </logger>
 
-        <logger name="com.app.manager.mapper" level="trace" additivity="false">
+        <logger name="com.potato.nedonado.mapper" level="trace" additivity="false">
             <AppenderRef ref = "Console"/>
         </logger>
 
-        <logger name="com.app.manager" level="info" additivity="false">
+        <logger name="com.potato.nedonado" level="info" additivity="false">
             <AppenderRef ref = "Console"/>
         </logger>
 
