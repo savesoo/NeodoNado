@@ -35,7 +35,10 @@ public class UserLoginController {
 
         // 로그인 상태 체크
         if(session.getAttribute("loginInfo")!=null){
-            return "redirect:/trade/board";
+
+           //return "redirect:/board/saleList";
+            return "redirect:/user/mypage"; // 임시루트
+
         }
 
         return "user/login";
@@ -86,7 +89,7 @@ public class UserLoginController {
 
         //return "redirect:/board/saleList"; 최종반영
 
-        return "redirect:/user/mypage";
+        return "redirect:/user/mypage"; // 임시루트
 
     }
 
