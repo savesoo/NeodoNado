@@ -49,7 +49,7 @@ public class ItemWriterController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<> writeItem(
+    public ResponseEntity<String> writeItem(
             MultipartHttpServletRequest multipartRequest,
             HttpServletRequest request,
             HttpServletResponse response
