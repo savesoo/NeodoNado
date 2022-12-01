@@ -67,6 +67,9 @@ dependencies {
     // @RestController 사용 가능한 jackson 설정(JSON 형식으로 반환)
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.0'
 
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 }
 
 test {
