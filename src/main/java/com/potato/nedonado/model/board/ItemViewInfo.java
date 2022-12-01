@@ -9,10 +9,10 @@ import lombok.*;
 @Getter
 @ToString
 @Builder
-public class BoardViewInto {
+public class ItemViewInfo {
     private long boardIdx;
     private String title;
-    private JSONPObject imgURL;
+    private String thumbnail;
     private int onSale;
     private int price;
     private long writeDate;

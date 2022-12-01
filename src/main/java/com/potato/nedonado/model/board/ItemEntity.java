@@ -9,24 +9,26 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class BoardDTO {
+public class ItemEntity {
     private long boardIdx;
     private int boardCategory;
     private String title;
     private String content;
     private int category;
+    private String thumbnail;
     private JSONPObject imgURL;
     private int onSale;
     private int price;
     private long userIdx;
     private long writeDate;
 
-    public BoardViewInto toBoardView(){
-        return BoardViewInto.builder()
+    public ItemViewInfo toEntityViewInfo(){
+        return ItemViewInfo.builder()
                 .boardIdx(boardIdx)
                 .title(title)
                 .price(price)
                 .onSale(onSale)
+                .thumbnail(thumbnail)
                 .writeDate(writeDate)
                 .build();
     }

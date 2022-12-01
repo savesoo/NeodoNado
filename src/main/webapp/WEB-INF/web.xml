@@ -18,7 +18,10 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/context/servlet-context.xml</param-value>
+            <param-value>
+                /WEB-INF/context/servlet-context.xml
+                /WEB-INF/context/security-context.xml
+            </param-value>
         </init-param>
 
         <!-- 핸들러를 찾지 못했을 때 처리 페이지로 이동 -->

@@ -4,7 +4,18 @@
 
 <mapper namespace="org.apache.ibatis.submitted.rounding.Mapper">
     <select id="selectItemList"
-    resultType="com.potato.nedonado.model.board.BoardDTO">
-        SELECT * FROM board LIMIT #{page}, 20
+    resultType="com.potato.nedonado.model.board.ItemEntity">
+        SELECT *
+        FROM board
+        WHERE onSale != 0
+        ORDER BY boardIdx DESC
+        LIMIT #{page}, 20
     </select>
+
+    <insert id="insertItem"
+    parameterType="com.potato.nedonado.model.board.ItemEntity">
+        INSERT INTO board
+        VALUES (${title}, ${content}, ${category}, #{imgURL}, ${onSale}, ${price}, ${userIdx}, ${writeDate})
+    </insert>
+
 </mapper>
