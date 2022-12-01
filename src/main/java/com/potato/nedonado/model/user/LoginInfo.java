@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Builder
 public class LoginInfo {
 
+    private long userIdx;
     private String userId;
     private String uuid;
     private long joinDate;
