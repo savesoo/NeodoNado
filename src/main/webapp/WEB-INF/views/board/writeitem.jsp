@@ -11,7 +11,7 @@
     <head>
         <title>Title</title>
         <style>
-            #drop_file_zone {
+            #dropFileZone {
                 background-color: #EEE;
                 border: #999 5px dashed;
                 width: 290px;
@@ -19,30 +19,34 @@
                 padding: 8px;
                 font-size: 18px;
             }
-            #drag_upload_file {
+            #dragUploadFile {
                 width:50%;
                 margin:0 auto;
             }
-            #drag_upload_file p {
+            #dragUploadFile p {
                 text-align: center;
             }
-            #drag_upload_file #selectfile {
+            #dragUploadFile #selectFile {
                 display: none;
             }
         </style>
     </head>
     <body>
         <form method="post" enctype="multipart/form-data">
-            <div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
-                <div id="drag_upload_file">
+            <div id="dropFileZone" draggable="true" ondragover="return false" >
+                <div id="dragUploadFile">
                     <p>Drop file(s) here</p>
                     <p>or</p>
-                    <p><input type="button" value="Select File(s)" onclick="file_explorer();" /></p>
-                    <input type="file" id="selectfile" multiple name ="selectFiles"/>
+                    <p><input type="button" value="Select File(s)" id="fileExplorer" /></p>
+                    <input type="file" id="selectFile" multiple name ="selectFile"/>
                 </div>
             </div>
         </form>
         <form>
+            <div>
+                <select name="fileList" id="fileList" readonly multiple size="min-width:317px"></select>
+                <div><label id="fileCnt">0</label> / 5</div>
+            </div>
             <input type="text" name="title" id="title">
             <input type="text" name="price" id="price">
             <select name="category">
@@ -50,36 +54,64 @@
                     <option value="${category.key}">${category.value}</option>
                 </c:forEach>
             </select>
-            <textarea name="content" id="content" cols="30" rows="10" style="resize: none;"></textarea>
+            <div>
+                <textarea name="content" id="content" cols="30" rows="10" style="resize: none;"></textarea>
+                <div>
+                    <label id="contentByte">0</label> / 300
+                </div>
+            </div>
             <input type="submit" value="작성">
         </form>
     </body>
     <script>
-        function upload_file(e) {
-            e.preventDefault();
-            ajax_file_upload(e.dataTransfer.files);
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            let bytes = 0;
+            const contentArea = document.querySelector('#content');
 
-        function file_explorer() {
-            document.getElementById('selectfile').click();
-            document.getElementById('selectfile').onchange = function() {
-                files = document.getElementById('selectfile').files;
-                ajax_file_upload(files);
-            };
-        }
+            contentArea.addEventListener('keyup', event => { // textArea 글자수 처리
+                bytes = ~-encodeURI(contentArea.value).split(/%..|./).length;
+                document.querySelector('#contentByte').innerText = bytes;
+            });
 
+            document.querySelector('#dropFileZone').addEventListener('drop', (event) => {
+                event.preventDefault();
+                ajax_file_upload(event.dataTransfer.files);
+            });
+
+            document.querySelector('#fileExplorer').addEventListener('click', (event) =>{
+                document.querySelector('#selectFile').click();
+                document.querySelector('#selectFile').onchange = function () {
+                    ajax_file_upload(document.querySelector('#selectFile').files);
+                };
+            })
+
+        });
+
+        let fileCnt = 0;
+        let fileList = [];
         function ajax_file_upload(files_obj) {
-            if(files_obj != undefined) {
+            if (files_obj != undefined) {
+                if(files_obj.length + fileCnt > 5) {
+                    alert("파일은 최대 5개 까지 업로드 가능합니다.");
+                    return;
+                }
                 var form_data = new FormData();
-                for(i=0; i<files_obj.length; i++) {
-                    form_data.append('file'+i, files_obj[i]);
-                    console.log(files_obj[i]);
+                for (i = 0; i < files_obj.length; i++) {
+                    form_data.append('file' + i, files_obj[i]);
                 }
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "/file/upload/v1", true);
-                xhttp.onload = function(event) {
+                xhttp.open("POST", "/board/write/upload", true);
+                xhttp.onload = function (event) {
                     if (xhttp.status == 200) {
-                        alert(this.responseText);
+                        let opt = '';
+                        JSON.parse(xhttp.response).forEach(e => fileList.push(e));
+                        fileList.forEach(e => {opt += '<option value="' + e + '">' + e + '</option>';});
+
+                        if(opt != '') {
+                            fileCnt += files_obj.length;
+                            document.querySelector('#fileList').innerHTML = opt;
+                            document.querySelector('#fileCnt').innerText = fileCnt;
+                        }
                     } else {
                         alert("Error " + xhttp.status + " occurred when trying to upload your file.");
                     }

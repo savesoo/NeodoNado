@@ -49,27 +49,30 @@ public class ItemWriterController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> writeItem(
+    public ResponseEntity<List<String>> writeItem(
             MultipartHttpServletRequest multipartRequest,
             HttpServletRequest request,
             HttpServletResponse response
     ) {
         HttpHeaders httpHeaders = new HttpHeaders();
+        List<String> nameList = null;
 
         try {
             multipartRequest.setCharacterEncoding("utf-8");
             // 파일을 업로드한 후 반환된 파일 이름이 저장되는 fileList를 다시 map에 저장할 것이다
-            fileProcess(multipartRequest);
+            nameList = fileProcess(multipartRequest);
         } catch (Exception e) {
-            return new ResponseEntity<>("insert Fail!!!", httpHeaders, HttpStatus.EXPECTATION_FAILED);
+            log.error(e.getMessage());
+            log.error(e.getStackTrace());
+            return new ResponseEntity<>(null, httpHeaders, HttpStatus.EXPECTATION_FAILED);
         }
 
         httpHeaders.set("some-header", "some-value");
-        return new ResponseEntity<>("insert OK", httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(nameList, httpHeaders, HttpStatus.OK);
     }
 
     private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{
-        String CURR_IMAGE_REPO_PATH = (String) ConfigUtil.getConfig("");
+        String CURR_IMAGE_REPO_PATH = (String) ConfigUtil.getConfig("fileSaveDir");
 
         List<String> fileList= new ArrayList<String>();
 
