@@ -18,13 +18,13 @@
         Service / Dao
     -->
 
-    <context:component-scan base-package="com.potato.potato2"></context:component-scan>
+    <context:component-scan base-package="com.potato.nedonado.service"></context:component-scan>
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/project"></property>
-        <property name="username" value="scott"> </property>
-        <property name="password" value="test1111*"> </property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/neodo_project"></property>
+        <property name="username" value="neodonado"> </property>
+        <property name="password" value="nado_221201"> </property>
         <property name="dataSourceProperties">
             <props>
                 <prop key="cachePrepStmts">true</prop>
@@ -43,6 +43,6 @@
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
     </bean>
 
-    <mybatis:scan base-package="com.potato.potato2.mapper"></mybatis:scan>
+    <mybatis:scan base-package="com.potato.nedonado.mapper"></mybatis:scan>
 
 </beans>

@@ -1,4 +1,4 @@
-package com.potato.newpotato.domain;
+package com.potato.nedonado.domain;
 
 import lombok.*;
 

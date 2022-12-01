@@ -1,4 +1,4 @@
-package com.potato.newpotato;
+package com.potato;
 
 import java.io.*;
 import javax.servlet.http.*;
