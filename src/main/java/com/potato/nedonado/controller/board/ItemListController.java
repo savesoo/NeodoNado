@@ -16,6 +16,6 @@ public class ItemListController {
     public String getBoardList(
     ){
         service.selectBoardList(1);
-        return "/board/saleList";
+        return "/board/listitem";
     }
 }

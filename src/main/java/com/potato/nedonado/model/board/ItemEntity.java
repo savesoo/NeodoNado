@@ -16,7 +16,7 @@ public class ItemEntity {
     private String content;
     private int category;
     private String thumbnail;
-    private JSONPObject imgURL;
+    private String imgURL;
     private int onSale;
     private int price;
     private long userIdx;

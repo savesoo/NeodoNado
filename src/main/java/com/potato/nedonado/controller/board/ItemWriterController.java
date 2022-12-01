@@ -1,41 +1,71 @@
 package com.potato.nedonado.controller.board;
 
 import com.potato.nedonado.model.board.ItemEntity;
+import com.potato.nedonado.service.board.ItemWriteService;
+import com.potato.nedonado.util.CategoryUtil;
 import com.potato.nedonado.util.ConfigUtil;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Log4j2
-@Controller
+@RestController
 @RequestMapping("/board/write")
 public class ItemWriterController {
+    @Autowired
+    ItemWriteService itemWriteService;
 
     @GetMapping
-    public String writeItem(
+    public ModelAndView writeItem(
             HttpServletRequest request
     ) {
-        return null;
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("itemCategory", CategoryUtil.categoryNames);
+        mav.setViewName("/board/writeitem");
+        return mav;
     }
 
     @PostMapping
     public String writeItem(
             HttpServletRequest request,
-            @RequestParam(required = false) ItemEntity itemEntity,
-            MultipartHttpServletRequest multipartRequest
+            @RequestParam(required = false) ItemEntity itemEntity
     ) {
         return null;
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<> writeItem(
+            MultipartHttpServletRequest multipartRequest,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        try {
+            multipartRequest.setCharacterEncoding("utf-8");
+            // 파일을 업로드한 후 반환된 파일 이름이 저장되는 fileList를 다시 map에 저장할 것이다
+            fileProcess(multipartRequest);
+        } catch (Exception e) {
+            return new ResponseEntity<>("insert Fail!!!", httpHeaders, HttpStatus.EXPECTATION_FAILED);
+        }
+
+        httpHeaders.set("some-header", "some-value");
+        return new ResponseEntity<>("insert OK", httpHeaders, HttpStatus.OK);
     }
 
     private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{

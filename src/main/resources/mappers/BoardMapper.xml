@@ -2,7 +2,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.apache.ibatis.submitted.rounding.Mapper">
+<mapper namespace="com.potato.nedonado.mapper.BoardMapper">
+
     <select id="selectItemList"
     resultType="com.potato.nedonado.model.board.ItemEntity">
         SELECT *
@@ -14,8 +15,9 @@
 
     <insert id="insertItem"
     parameterType="com.potato.nedonado.model.board.ItemEntity">
-        INSERT INTO board
-        VALUES (${title}, ${content}, ${category}, #{imgURL}, ${onSale}, ${price}, ${userIdx}, ${writeDate})
+        INSERT INTO board(title, content, category, thumbnail, imgURL, price, userIdx, writeDate)
+        VALUES (#{title}, #{content}, #{category}, #{thumbnail}, #{imgURL}, #{price}, #{userIdx}, #{writeDate})
     </insert>
+
 
 </mapper>
