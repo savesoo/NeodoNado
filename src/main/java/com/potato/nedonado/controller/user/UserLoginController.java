@@ -84,7 +84,9 @@ public class UserLoginController {
         session.setAttribute("loginInfo", user.loginData());
 
 
-        return "redirect:/trade/board";
+        //return "redirect:/board/saleList"; 최종반영
+
+        return "redirect:/user/mypage";
 
     }
 

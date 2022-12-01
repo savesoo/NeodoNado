@@ -14,6 +14,8 @@ public interface UserMapper {
     // ud, pw로 로그인
     UserDTO selectByIdAndPw(UserDTO userDTO);
 
+    // 유저 정보 조회
+    UserDTO selectUserByIdx(long userIdx);
 
     // 정보 수정
     int editUserInfo(UserDTO userDTO);

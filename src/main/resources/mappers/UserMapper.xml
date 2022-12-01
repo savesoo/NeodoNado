@@ -4,20 +4,22 @@
 
 <mapper namespace="com.potato.nedonado.mapper.UserMapper">
 
-    <select id="getTime" resultType="string">
-        select now()
-    </select>
-
     <!-- 가입 -->
     <insert id="insertUser" parameterType="com.potato.nedonado.model.user.UserDTO">
         insert into user (userId, userPw, joinDate, location, nickname) values (#{userId}, #{userPw}, #{joinDate}, #{location}, #{nickname})
     </insert>
 
-    <!-- 로그인시 조회 -->
+    <!-- id, pw 확인후 로그인 -->
     <select id="selectByIdAndPw"
             parameterType="com.potato.nedonado.model.user.UserDTO"
             resultType="com.potato.nedonado.model.user.UserDTO">
-        select * from user where userId=#{userId} and userPw=#{userPw}
+        select * from user where userId=#{userId} and userPw=#{userPw} and deleted=0
+    </select>
+
+    <!-- id로 유저 정보 조회 -->
+    <select id="selectUserByIdx"
+            resultType="com.potato.nedonado.model.user.UserDTO">
+        select * from user where userIdx=#{userIdx}
     </select>
 
     <!-- 정보 수정 -->
@@ -36,13 +38,13 @@
     <select id="selectUserByUUID"
             parameterType="com.potato.nedonado.model.user.UserDTO"
             resultType="com.potato.nedonado.model.user.UserDTO">
-        select * from user where uuid=#{uuid}
+        select * from user where uuid=#{uuid} and deleted=0
     </select>
 
 
     <!-- uuid 갱신 -->
     <update id="updateUUIDtoUser" parameterType="com.potato.nedonado.model.user.UserDTO">
-        update user set uuid=#{uuid} where userId=#{userId}
+        update user set uuid=#{uuid} where userIdx=#{userIdx}
     </update>
 
 

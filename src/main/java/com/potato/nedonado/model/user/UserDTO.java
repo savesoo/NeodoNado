@@ -31,6 +31,7 @@ public class UserDTO {
     public LoginInfo loginData(){
 
         return LoginInfo.builder()
+                .userIdx(userIdx)
                 .uuid(uuid)
                 .userId(userId)
                 .joinDate(joinDate)
