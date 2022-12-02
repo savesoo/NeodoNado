@@ -25,7 +25,7 @@
 
     <!-- 정보 수정 -->
     <update id="editUserInfo" parameterType="com.potato.nedonado.model.user.UserDTO">
-        update user set location=#{location}, nickname=#{nickname}, phone=#{phone}, bYear=#{bYear}, bMonth=#{bMonth}, bDay=#{bDay} where userIdx=#{userIdx}
+        update user set location=#{location}, nickname=#{nickname}, phone=#{phone}, byear=#{byear}, bmonth=#{bmonth}, bday=#{bday} where userIdx=#{userIdx}
     </update>
 
     <!-- 회원 탈퇴 -->

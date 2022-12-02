@@ -1,5 +1,6 @@
 package com.potato.nedonado.model.user;
 
+import com.potato.nedonado.util.Util;
 import lombok.*;
 
 @AllArgsConstructor
@@ -21,9 +22,9 @@ public class UserDTO {
     private String phone;
 
     private String location;
-    private int bYear;
-    private int bMonth;
-    private int bDay;
+    private int byear;
+    private int bmonth;
+    private int bday;
 
     private long joinDate;
     private boolean deleted;
@@ -39,6 +40,22 @@ public class UserDTO {
                 .location(location)
                 .deleted(deleted)
                 .build();
+    }
+
+    public UserInfo toUserInfo(){
+
+        return UserInfo.builder()
+                .userIdx(userIdx)
+                .userId(userId)
+                .nickname(nickname)
+                .nation(nation)
+                .phone(phone)
+                .location(location)
+                .byear(byear)
+                .bmonth(bmonth)
+                .bday(bday)
+                .joinDate(Util.convertLongTimestampToString(joinDate)).build();
+
     }
 
 }
