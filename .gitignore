@@ -43,3 +43,6 @@ bin/
 
 ### upload img ###
 !**/src/main/webapp/resources/files/img/
+*.png
+*.jpg
+*.gif
