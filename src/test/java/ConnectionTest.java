@@ -1,14 +1,19 @@
 import com.potato.nedonado.mapper.UserMapper;
+import com.potato.nedonado.model.user.LoginInfo;
 import com.potato.nedonado.model.user.UserDTO;
+import com.potato.nedonado.service.user.UserDataEditService;
+import com.potato.nedonado.service.user.UserMyPageReadService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -20,6 +25,19 @@ public class ConnectionTest {
 
     @Autowired(required = false)
     private UserMapper userMapper;
+
+    @Autowired(required = false)
+    private UserMyPageReadService service;
+
+
+
+    @Test
+    public void selectUser() throws SQLException {
+        long userIdx = 2;
+        service.selectUserByIdx(userIdx);
+    }
+
+
 
     @Test
     public void deleteUserTest(){
@@ -36,14 +54,14 @@ public class ConnectionTest {
     public void editUserTest(){
 
         UserDTO user = UserDTO.builder()
+                .userIdx(2)
                 .location("제주")
                 .nickname("tangerine")
-                .userId("test")
                 .build();
 
         log.info(user);
 
-        int result = userMapper.editUserInfo(user);
+        long result = userMapper.editUserInfo(user);
 
         Assertions.assertEquals(1, result);
 

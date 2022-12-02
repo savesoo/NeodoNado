@@ -51,7 +51,7 @@ public class UserRegistController {
         userRegistService.insertUser(userDTO);
 
         String message = "회원가입이 완료되었습니다. 로그인을 진행해 주세요.";
-        rttr.addAttribute("regMsg", message);
+        rttr.addFlashAttribute("regMsg", message);
 
         return "redirect:/user/login";
 

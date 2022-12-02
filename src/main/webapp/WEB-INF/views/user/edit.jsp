@@ -12,29 +12,44 @@
 </head>
 <body>
 
+<h1>내 정보 수정</h1>
+<form method="post">
+<table>
+  <tr>
+    <td>아이디 </td>
+    <td>${loginInfo.userId}</td>
+  </tr>
+  <tr>
+    <td>닉네임 </td>
+    <td><input type="text" name="nickname" value="${loginInfo.nickname}"></td>
+  </tr>
+  <tr>
+    <td>지역 </td>
+    <td><input type="text" name="location" value="${loginInfo.location}"></td>
+  </tr>
+  <tr>
+    <td>핸드폰 </td>
+    <td><input type="text" name="phone" value="${loginInfo.phone}"></td>
+  </tr>
+  <tr>
+    <td>생년월일 </td>
+    <td>
+      <input type="number" name="bYear" value="${param.bYear}">
+      <input type="number" name="bMonth" value="${param.bMonth}">
+      <input type="number" name="bDay" value="${param.bDay}">
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><input type="submit" value="수정 완료"></td>
+  </tr>
 
-  <h1>내 정보 수정</h1>
-  <form method="post">
-    <table>
-      <tr>
-        <td>아이디 </td>
-        <td>${loginInfo.userId}</td>
-      </tr>
-      <tr>
-        <td>닉네임 </td>
-        <td>${loginInfo.nickname}</td>
-      </tr>
-      <tr>
-        <td>지역 </td>
-        <td>${loginInfo.location}</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="submit" value="정보 수정"></td>
-      </tr>
+</table>
 
-    </table>
+
   </form>
+
+  <button><a href="/user/mypage">마이페이지로 돌아가기</a></button>
 
 </body>
 </html>

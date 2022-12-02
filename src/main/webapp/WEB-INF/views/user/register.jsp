@@ -34,6 +34,10 @@
                 <td><input type="text" name="location"></td>
             </tr>
             <tr>
+                <td>연락처 </td>
+                <td><input type="text" name="phone"></td>
+            </tr>
+            <tr>
                 <td>생일 </td>
                 <td>
                     <input type="number" name="bYear" placeholder="년도">
