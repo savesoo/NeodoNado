@@ -46,6 +46,11 @@
     <mvc:interceptors>
 
         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.potato.spring.interceptor.LoginRememberInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
             <mvc:mapping path="/board/**"/>
             <bean class="com.potato.spring.interceptor.AuthCheckInterceptor"/>
         </mvc:interceptor>
