@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -164,8 +163,8 @@ public class ItemWriterController {
 
         try {
             BufferedImage oImage = ImageIO.read(oFile); // 원본이미지
-            int tWidth = 256; // 생성할 썸네일이미지의 너비
-            int tHeight = 256; // 생성할 썸네일이미지의 높이
+            int tWidth = 128; // 생성할 썸네일이미지의 너비
+            int tHeight = 128; // 생성할 썸네일이미지의 높이
 
             BufferedImage tImage = new BufferedImage(tWidth, tHeight, BufferedImage.TYPE_3BYTE_BGR); // 썸네일이미지
             Graphics2D graphic = tImage.createGraphics();
@@ -177,6 +176,8 @@ public class ItemWriterController {
             list.add(oFile.getName());
         } catch (IOException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
+            log.error(e.getStackTrace());
         }
         return list;
     }

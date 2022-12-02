@@ -5,5 +5,6 @@
 	"defaultDir": "C:\\Users\\LG\\Documents\\himidea_fullstack\\dev\\persnalProject\\NeodoNado\\src\\main\\webapp\\resources\\files",
 	"imgURL" : "/resources/files/img",
 	"titleSize" : 200,
-	"contentSize" : 300
+	"contentSize" : 300,
+	"thumbnailSize" : 128
 }
