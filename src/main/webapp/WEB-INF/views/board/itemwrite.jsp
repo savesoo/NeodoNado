@@ -124,7 +124,7 @@
                 xhttp.setRequestHeader('Content-type', 'application/json');
                 xhttp.onload = function (event) {
                     if (xhttp.status == 200) {
-                        location.href='/board/list';
+                        location.href=xhttp.responseText;
                     } else {
                         alert("Error " + xhttp.status + " occurred when trying to upload your file.");
                     }
