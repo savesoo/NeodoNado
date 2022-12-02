@@ -29,7 +29,7 @@ public class LoginRememberInterceptor implements HandlerInterceptor {
         // 세션 체크
         HttpSession session = request.getSession(false);
 
-        if (session!=null && session.getAttribute("loginInfo")==null) {
+        if (session ==null || session.getAttribute("loginInfo")==null) {
 
             // 쿠키 체크
             Cookie cookie = findCookie(request.getCookies(), "uuid");
@@ -39,7 +39,7 @@ public class LoginRememberInterceptor implements HandlerInterceptor {
                 log.info(" >>> 세션 없으므로 자동로그인 X >>> ");
                 log.info(" >>> 쿠키 확인, uuid 여부 체크 >>> ");
 
-                log.info("cookie 있니? = " + cookie.getValue());
+                //log.info("cookie 있니? = " + cookie.getValue());
 
                 UserDTO user = loginService.selectUUID(cookie.getValue());
 
@@ -58,19 +58,15 @@ public class LoginRememberInterceptor implements HandlerInterceptor {
 
                     log.info(" >>> 자동로그인 처리 완료 >>> ");
 
-                } else {
-
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
+                    return true;
 
                 }
 
-                return true;
             }
 
             log.info(" >>> 세션 있으므로 자동로그인 미처리 >>> ");
             log.info("session = " + session);
-            return true;
+
         }
 
         log.info(" >>> 기존 자동로그인 유지 상태 >>> ");
