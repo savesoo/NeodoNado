@@ -23,13 +23,13 @@ public class UserMyPageReadController {
     }
 
     @GetMapping
-    public void getMyPage(@ModelAttribute UserDTO userDTO, Model model, HttpServletRequest req) throws SQLException {
+    public void getMyPage(Model model, HttpServletRequest req) throws SQLException {
 
         log.info("get MyPage ... ");
 
         LoginInfo loginInfo = (LoginInfo) req.getSession().getAttribute("loginInfo");
         log.info(loginInfo);
-        model.addAttribute("loginInfo", myPageReadService.selectUserByIdx(loginInfo.getUserIdx()));
+        model.addAttribute("user", myPageReadService.selectUserByIdx(loginInfo.getUserIdx()));
 
     }
 

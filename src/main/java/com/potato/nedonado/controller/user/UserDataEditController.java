@@ -15,37 +15,37 @@ import java.sql.SQLException;
 @Log4j2
 @Controller
 @RequestMapping("/user/edit")
-public class UserEditController {
+public class UserDataEditController {
 
     private final UserDataEditService editService;
 
     private final UserMyPageReadService readService;
 
-    public UserEditController(UserDataEditService editService, UserMyPageReadService readService) {
+    public UserDataEditController(UserDataEditService editService, UserMyPageReadService readService) {
         this.editService = editService;
         this.readService = readService;
     }
 
     @GetMapping
-    public void getEditPage(@ModelAttribute UserDTO userDTO, Model model, HttpServletRequest req) throws SQLException {
+    public void getEditPage(Model model, HttpServletRequest req) throws SQLException {
         log.info("get edit ... ");
         LoginInfo loginInfo = (LoginInfo)  req.getSession().getAttribute("loginInfo");
-        model.addAttribute("loginInfo", readService.selectUserByIdx(loginInfo.getUserIdx()));
+        model.addAttribute("user", readService.selectUserByIdx(loginInfo.getUserIdx()));
     }
 
 
     @PostMapping
     public String postEdit(
             @ModelAttribute UserDTO userDTO,
-            Model model,
             HttpServletRequest req
     ) throws SQLException {
 
         log.info("post edit ... ");
+        log.info(userDTO);
 
         LoginInfo loginInfo = (LoginInfo) req.getSession().getAttribute("loginInfo");
         log.info(loginInfo);
-        model.addAttribute("loginInfo", editService.editUserInfo(userDTO, loginInfo.getUserIdx()));
+        editService.editUserInfo(userDTO, loginInfo.getUserIdx());
 
         return "redirect:/user/mypage";
 

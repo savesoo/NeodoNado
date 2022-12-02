@@ -18,26 +18,26 @@
         <table>
             <c:if test="${loginInfo != null}">
             <tr>
+                <td>내 가입날짜 </td>
+                <td>${user.joinDate}</td>
+            </tr>
+            <tr>
                 <td>아이디 </td>
-                <td><input type="text" name="userId" value="${loginInfo.userId}" readonly></td>
+                <td><input type="text" name="userId" value="${user.userId}" readonly></td>
             </tr>
             <tr>
                 <td>닉네임 </td>
-                <td><input type="text" name="nickname" value="${loginInfo.nickname}" readonly></td>
+                <td><input type="text" name="nickname" value="${user.nickname}" readonly></td>
             </tr>
             <tr>
                 <td>지역 </td>
-                <td><input type="text" name="location" value="${loginInfo.location}" readonly></td>
-            </tr>
-            <tr>
-                <td>가입날짜 </td>
-                <td>${loginInfo.joinDate}</td>
+                <td><input type="text" name="location" value="${user.location}" readonly></td>
             </tr>
             </c:if>
 
             <tr>
                 <td></td>
-                <td><input type="submit" value="정보 수정"></td>
+                <td><input type="submit" value="내 정보 수정"></td>
             </tr>
 
         </table>
