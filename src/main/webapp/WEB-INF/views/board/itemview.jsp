@@ -14,34 +14,52 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/slide.css"/>
 </head>
 <body>
-<div class="slideshow-container">
-    <c:if test="${item.imgURL == ''}">
-        <div class="mySlides fade">
-            <div class="numbertext">1 / 1</div>
-            <img src="/resources/files/default.jpg"/>
-            <div class="text">Caption Text</div>
-        </div>
-    </c:if>
-    <c:forEach items="${item.imgURL}" var="url" varStatus="status">
-        <div class="mySlides fade">
-            <div class="numbertext">${status.count} / 3</div>
-            <img src="${ConfigUtil.getConfig("imgURL")}/${url}" 500 500 style="width:500px; height:500px;"/>
-            <%--<div class="text">Caption Text</div>--%>
-        </div>
-    </c:forEach>
+<table>
+    <tr>
+        <td colspan="2">
+            <div class="slideshow-container">
+                <c:if test="${item.imgURL == ''}">
+                    <div class="mySlides fade">
+                        <div class="numbertext">1 / 1</div>
+                        <img src="/resources/files/default.jpg"/>
+                        <div class="text">Caption Text</div>
+                    </div>
+                </c:if>
+                <c:forEach items="${item.imgURL}" var="url" varStatus="status">
+                    <div class="mySlides fade">
+                        <div class="numbertext">${status.count} / 3</div>
+                        <img src="${ConfigUtil.getConfig("imgURL")}/${url}" 500 500 style="width:500px; height:500px;"/>
+                            <%--<div class="text">Caption Text</div>--%>
+                    </div>
+                </c:forEach>
 
-    <!-- Next and previous buttons -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-    <!-- The dots/circles -->
-    <div style="text-align: center; margin-top:-50px;">
-        <c:forEach items="${item.imgURL}" var="url" varStatus="status">
-            <span class="dot" onclick="currentSlide(${status.count})"></span>
-        </c:forEach>
-    </div>
-</div>
-<br>
+                <!-- The dots/circles -->
+                <div style="text-align: center; margin-top:-50px;">
+                    <c:forEach items="${item.imgURL}" var="url" varStatus="status">
+                        <span class="dot" onclick="currentSlide(${status.count})"></span>
+                    </c:forEach>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">　</td>
+    </tr>
+    <tr>
+        <td colspan="2">${item.title}</td>
+    </tr>
+    <tr>
+        <td>${item.onSale} / ${item.category}</td>
+        <td>${item.price}</td>
+    </tr>
+    <tr>
+        <td colspan="2">${item.content}</td>
+    </tr>
+</table>
 
 </body>
 <script>

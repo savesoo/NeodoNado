@@ -47,6 +47,7 @@
                 <select name="fileList" id="fileList" disabled readonly multiple size="min-width:317px"></select>
                 <div><label id="fileCnt">0</label> / 5</div>
             </div>
+            <input type="hidden" name="thumbnail" id="thumbnail">
             <input type="text" name="title" id="title">
             <input type="text" name="price" id="price">
             <select name="category" id="category">
@@ -117,7 +118,8 @@
                     content: content.value,
                     price: price.value,
                     category: category.options[category.selectedIndex].value,
-                    imgURL: fileList.toString()
+                    imgURL: fileList.toString(),
+                    thumbnail: document.querySelector('#thumbnail').value
                 };
                 let xhttp = new XMLHttpRequest();
                 xhttp.open('POST', '/board/write', true);
@@ -165,8 +167,11 @@
                 xhttp.onload = function (event) {
                     if (xhttp.status == 200) {
                         let opt = '';
-                        JSON.parse(xhttp.response).forEach(e => fileList.push(e));
+                        let obj = JSON.parse(xhttp.response);
+                        console.log(obj.fileList)
+                        obj.fileList.forEach(e => fileList.push(e));
                         fileList.forEach(e => {opt += '<option value="' + e + '">' + e + '</option>';});
+                        document.querySelector('#thumbnail').value = obj.thumbnail[0];
 
                         if(opt != '') {
                             fileCnt += files_obj.length;

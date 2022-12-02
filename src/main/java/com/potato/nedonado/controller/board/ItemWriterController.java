@@ -16,12 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.IOException;
+import java.util.*;
 import java.util.List;
 
 @Log4j2
@@ -73,17 +76,19 @@ public class ItemWriterController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<List<String>> writeItem(
+    public ResponseEntity<Map<String, List<String>>> writeItem(
             MultipartHttpServletRequest multipartRequest,
             HttpServletRequest request,
             HttpServletResponse response
     ) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        List<String> nameList = null;
+        //List<String> nameList = null;
+        Map<String, List<String>> nameList = null;
 
         try {
             multipartRequest.setCharacterEncoding("utf-8");
             // 파일을 업로드한 후 반환된 파일 이름이 저장되는 fileList를 다시 map에 저장할 것이다
+            //nameList = fileProcess(multipartRequest);
             nameList = fileProcess(multipartRequest);
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -95,13 +100,15 @@ public class ItemWriterController {
         return new ResponseEntity<>(nameList, httpHeaders, HttpStatus.OK);
     }
 
-    private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{
+    private Map<String, List<String>> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{
         String CURR_IMAGE_REPO_PATH = (String) ConfigUtil.getConfig("fileSaveDir");
 
         List<String> fileList= new ArrayList<String>();
+        List<String> thumbnailName = null;
 
         // 첨부된 파일 이름을 가져올 것이다
         Iterator<String> fileNames = multipartRequest.getFileNames();
+        int count = 0;
 
         while(fileNames.hasNext()){
             String fileName = fileNames.next();
@@ -130,9 +137,47 @@ public class ItemWriterController {
                 }
                 // 임시로 저장된 mutilpartFile을 실제 파일로 저장
                 mFile.transferTo(new File(CURR_IMAGE_REPO_PATH +"\\"+ originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+                if(count++ == 0){
+                    thumbnailName = thumbnailFile(CURR_IMAGE_REPO_PATH +"\\"+ originalFileName);
+                }
             }
         }
         // 첨부한 파일 이름이 저장된 fileList 반환해줘라
-        return fileList;
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("fileList", fileList);
+        map.put("thumbnail", thumbnailName);
+        return map;
+    }
+
+    private List<String> thumbnailFile(
+            String oPath // 원본 패스
+    ) {
+        List<String> list = new ArrayList<>();
+        File oFile = new File(oPath);
+
+        int index = oPath.lastIndexOf(".");
+        String ext = oPath.substring(index + 1); // 파일 확장자
+
+        String tPath = (String)ConfigUtil.getConfig("fileSaveDir") + "/thumbnail/" + oFile.getName(); // 썸네일저장 경로
+        log.info(tPath);
+        File tFile = new File(tPath);
+
+        try {
+            BufferedImage oImage = ImageIO.read(oFile); // 원본이미지
+            int tWidth = 256; // 생성할 썸네일이미지의 너비
+            int tHeight = 256; // 생성할 썸네일이미지의 높이
+
+            BufferedImage tImage = new BufferedImage(tWidth, tHeight, BufferedImage.TYPE_3BYTE_BGR); // 썸네일이미지
+            Graphics2D graphic = tImage.createGraphics();
+            Image image = oImage.getScaledInstance(tWidth, tHeight, Image.SCALE_SMOOTH);
+            graphic.drawImage(image, 0, 0, tWidth, tHeight, null);
+            graphic.dispose(); // 리소스를 모두 해제
+
+            ImageIO.write(tImage, ext, tFile);
+            list.add(oFile.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
