@@ -42,4 +42,14 @@
         <property name="defaultEncoding" value="utf-8" />
     </bean>
 
+    <!-- 권한 확인 인터셉터 -->
+    <mvc:interceptors>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/board/**"/>
+            <bean class="com.potato.spring.interceptor.AuthCheckInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
 </beans>
