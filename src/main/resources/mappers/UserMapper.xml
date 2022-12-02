@@ -37,7 +37,7 @@
 
     <!-- uuid로 회원 조회 -->
     <select id="selectUserByUUID"
-            parameterType="com.potato.nedonado.model.user.UserDTO"
+            parameterType="String"
             resultType="com.potato.nedonado.model.user.UserDTO">
         select * from user where uuid=#{uuid} and deleted=0
     </select>
