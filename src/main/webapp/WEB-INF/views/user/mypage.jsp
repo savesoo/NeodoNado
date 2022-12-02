@@ -14,7 +14,7 @@
 <body>
 
     <h1>마이페이지</h1>
-    <form action="/user/edit">
+
         <table>
             <c:if test="${loginInfo != null}">
             <tr>
@@ -34,19 +34,15 @@
                 <td><input type="text" name="location" value="${user.location}" readonly></td>
             </tr>
             </c:if>
-
-            <tr>
-                <td></td>
-                <td><input type="submit" value="내 정보 수정"></td>
-            </tr>
-
         </table>
-    </form>
 
+    <form action="/user/edit">
+        <input type="submit" value="내 정보 수정">
+    </form>
 
     <button><a href="#">내가 작성한 글</a></button>
     <button><a href="/board/saleList">이전 화면으로</a></button>
-
+    <br>
 
     <form>
         <input type="submit" value="회원 탈퇴">
