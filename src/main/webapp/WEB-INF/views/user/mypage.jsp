@@ -14,20 +14,24 @@
 <body>
 
     <h1>마이페이지</h1>
-    <form method="post">
+    <form action="/user/edit">
         <table>
             <c:if test="${loginInfo != null}">
             <tr>
                 <td>아이디 </td>
-                <td>${loginInfo.userId}</td>
+                <td><input type="text" name="userId" value="${loginInfo.userId}" readonly></td>
             </tr>
             <tr>
                 <td>닉네임 </td>
-                <td>${loginInfo.nickname}</td>
+                <td><input type="text" name="nickname" value="${loginInfo.nickname}" readonly></td>
             </tr>
             <tr>
                 <td>지역 </td>
-                <td>${loginInfo.location}</td>
+                <td><input type="text" name="location" value="${loginInfo.location}" readonly></td>
+            </tr>
+            <tr>
+                <td>가입날짜 </td>
+                <td>${loginInfo.joinDate}</td>
             </tr>
             </c:if>
 
@@ -46,6 +50,9 @@
 
     <form>
         <input type="submit" value="회원 탈퇴">
+    </form>
+    <form action="/user/logout">
+        <input type="submit" value="로그아웃">
     </form>
 
 

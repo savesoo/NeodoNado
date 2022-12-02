@@ -17,8 +17,9 @@ public interface UserMapper {
     // 유저 정보 조회
     UserDTO selectUserByIdx(long userIdx);
 
+
     // 정보 수정
-    int editUserInfo(UserDTO userDTO);
+    long editUserInfo(UserDTO userDTO);
 
     // 탈퇴 처리
     int deleteUser(UserDTO userDTO);
