@@ -13,6 +13,6 @@ public class StringToLongFormatter implements Formatter<Long> {
 
     @Override
     public String print(Long object, Locale locale) {
-        return Long.parseLong(text);
+        return null;
     }
 }
