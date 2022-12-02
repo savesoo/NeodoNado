@@ -15,18 +15,20 @@
   <body>
       <table>
           <c:forEach items="${itemList}" var="item">
-              <tr>
-                  <td rowspan="3">
-                      <img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
-                  </td>
-                  <td></td>
-              </tr>
-              <tr>
-                  <td>${item.title}</td>
-              </tr>
-              <tr>
-                  <td>${item.price}</td>
-              </tr>
+              <a href="/board/vier/${item.boardIdx}">
+                  <tr>
+                      <td rowspan="3">
+                          <img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
+                      </td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>${item.title}</td>
+                  </tr>
+                  <tr>
+                      <td>${item.price}</td>
+                  </tr>
+              </a>
           </c:forEach>
       </table>
   </body>
