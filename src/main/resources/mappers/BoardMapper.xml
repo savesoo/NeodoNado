@@ -20,4 +20,10 @@
     </insert>
 
 
+    <select id="selectItemByIdx"
+        resultType="com.potato.nedonado.model.board.ItemEntity">
+        SELECT *
+        FROM board
+        WHERE boardIdx = #{boardIdx}
+    </select>
 </mapper>

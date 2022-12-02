@@ -1,19 +1,30 @@
 package com.potato.nedonado.model.board;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.*;
 
-@AllArgsConstructor
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @NoArgsConstructor
-@Setter
+@AllArgsConstructor
 @Getter
+@Setter
 @ToString
 @Builder
 public class ItemViewInfo {
     private long boardIdx;
     private String title;
-    private String thumbnail;
+    private String content;
+    private int category;
+    private List<String> imgURL;
     private int onSale;
     private int price;
-    private long writeDate;
+    private long userIdx;
+    private String writeDate;
+
+    public void makeImgURL(String img) {
+        if(img == null || img.isEmpty()) return;
+        imgURL = Arrays.asList(img.split(","));
+    }
 }

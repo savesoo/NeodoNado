@@ -10,4 +10,6 @@ public interface BoardMapper {
     List<ItemEntity> selectItemList(int page);
 
     int insertItem(ItemEntity itemEntity);
+
+    ItemEntity selectItemByIdx(long boardIdx);
 }

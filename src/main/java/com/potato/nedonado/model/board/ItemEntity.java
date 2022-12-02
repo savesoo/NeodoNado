@@ -1,5 +1,6 @@
 package com.potato.nedonado.model.board;
 
+import com.potato.nedonado.util.Util;
 import lombok.*;
 
 @NoArgsConstructor
@@ -21,8 +22,8 @@ public class ItemEntity {
     private long userIdx;
     private long writeDate;
 
-    public ItemViewInfo toItemViewInfo(){
-        return ItemViewInfo.builder()
+    public ItemViewListInfo toItemViewListInfo(){
+        return ItemViewListInfo.builder()
                 .boardIdx(boardIdx)
                 .title(title)
                 .price(price)
@@ -30,5 +31,20 @@ public class ItemEntity {
                 .thumbnail(thumbnail)
                 .writeDate(writeDate)
                 .build();
+    }
+
+    public ItemViewInfo toItemViewInfo() {
+        ItemViewInfo view = ItemViewInfo.builder()
+                .boardIdx(boardIdx)
+                .category(category)
+                .title(title)
+                .content(content)
+                .price(price)
+                .onSale(onSale)
+                .writeDate(Util.convertLongTimestampToString(writeDate))
+                .userIdx(userIdx)
+                .build();
+        view.makeImgURL(imgURL);
+        return view;
     }
 }
