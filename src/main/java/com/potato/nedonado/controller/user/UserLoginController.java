@@ -4,6 +4,7 @@ import com.potato.nedonado.model.user.UserDTO;
 import com.potato.nedonado.service.user.UserLoginService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,22 +37,30 @@ public class UserLoginController {
         // 로그인 상태 체크
         if(session.getAttribute("loginInfo")!=null){
 
-           //return "redirect:/board/saleList";
-            return "redirect:/user/mypage"; // 임시루트
+            return "redirect:/board/list";
+            //return "redirect:/user/mypage"; // 임시루트
 
         }
 
         return "user/login";
+
     }
 
 
     @PostMapping
     public String postLogin(@ModelAttribute UserDTO userDTO,
+                            BindingResult bindingResult,
                             HttpServletRequest req,
                             HttpServletResponse res,
                             RedirectAttributes rttr) throws SQLException {
 
         log.info("post login ... ");
+
+
+        if(bindingResult.hasErrors()){
+            log.info(bindingResult.getAllErrors());
+            return "redirect:user/login";
+        }
 
         HttpSession session = req.getSession();
 
@@ -71,7 +80,7 @@ public class UserLoginController {
 
         String rememberMe = req.getParameter("rememberMe");
 
-        if(rememberMe!=null){
+        if(rememberMe!=null && rememberMe.equals("on")){
 
             UUID uuid = UUID.randomUUID();
             log.info("uuid = " + uuid);
@@ -87,9 +96,9 @@ public class UserLoginController {
         session.setAttribute("loginInfo", user.loginData());
 
 
-        //return "redirect:/board/saleList"; 최종반영
+        return "redirect:/board/list"; //최종반영
 
-        return "redirect:/user/mypage"; // 임시루트
+        //return "redirect:/user/mypage"; // 임시루트
 
     }
 

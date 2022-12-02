@@ -28,14 +28,18 @@ public class LoginRememberInterceptor implements HandlerInterceptor {
 
         Cookie cookie = findCookie(request.getCookies(), "uuid");
 
+        log.info("cookie 있니? = " + cookie.getValue());
+
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("loginInfo")==null) {
+        if (session!=null && session.getAttribute("loginInfo")==null) {
 
             if (cookie != null && cookie.getValue() != null) {
 
                 log.info(" >>> 세션 없으므로 자동로그인 X >>> ");
                 log.info(" >>> 쿠키 확인, uuid 여부 체크 >>> ");
+                log.info("cookie 있니? = " + cookie);
+
                 UserDTO user = loginService.selectUUID(cookie.getValue());
 
                 log.info("저장된 uuid user = " + user);
@@ -60,6 +64,7 @@ public class LoginRememberInterceptor implements HandlerInterceptor {
             }
 
             log.info(" >>> 세션 있으므로 자동로그인 미처리 >>> ");
+            log.info("session = " + session);
             return true;
         }
 
