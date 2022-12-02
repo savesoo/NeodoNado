@@ -1,6 +1,5 @@
 package com.potato.nedonado.model.board;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.*;
 
 @NoArgsConstructor
@@ -22,7 +21,7 @@ public class ItemEntity {
     private long userIdx;
     private long writeDate;
 
-    public ItemViewInfo toEntityViewInfo(){
+    public ItemViewInfo toItemViewInfo(){
         return ItemViewInfo.builder()
                 .boardIdx(boardIdx)
                 .title(title)

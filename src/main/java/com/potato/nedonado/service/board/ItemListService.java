@@ -19,7 +19,7 @@ public class ItemListService {
         List<ItemEntity> entities = boardMapper.selectItemList(page);
 
         for(ItemEntity entity : entities) {
-            list.add(entity.toEntityViewInfo());
+            list.add(entity.toItemViewInfo());
         }
 
         return list;

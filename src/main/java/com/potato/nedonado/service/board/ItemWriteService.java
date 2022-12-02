@@ -13,7 +13,6 @@ public class ItemWriteService {
     BoardMapper boardMapper;
 
     public int writeItem(ItemEntity itemEntity) {
-        return 0;
-        //return boardMapper.insertItem(itemEntity);
+        return boardMapper.insertItem(itemEntity);
     }
 }

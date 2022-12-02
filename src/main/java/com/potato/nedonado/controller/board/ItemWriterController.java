@@ -1,15 +1,16 @@
 package com.potato.nedonado.controller.board;
 
 import com.potato.nedonado.model.board.ItemEntity;
+import com.potato.nedonado.model.user.LoginInfo;
 import com.potato.nedonado.service.board.ItemWriteService;
 import com.potato.nedonado.util.CategoryUtil;
 import com.potato.nedonado.util.ConfigUtil;
+import com.potato.nedonado.util.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -17,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,16 +37,39 @@ public class ItemWriterController {
     ) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("itemCategory", CategoryUtil.categoryNames);
-        mav.setViewName("/board/writeitem");
+        mav.setViewName("/board/itemwrite");
         return mav;
     }
 
     @PostMapping
-    public String writeItem(
+    public ResponseEntity<String> writeItem(
             HttpServletRequest request,
-            @RequestParam(required = false) ItemEntity itemEntity
+            @RequestBody ItemEntity itemEntity
     ) {
-        return null;
+        log.info(itemEntity);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+
+        if((itemEntity.getTitle() == null  || itemEntity.getTitle().isEmpty())
+        || (itemEntity.getContent() == null  || itemEntity.getContent().isEmpty())
+        || (itemEntity.getPrice() <= 0)) {
+            return new ResponseEntity<>(null, httpHeaders, HttpStatus.BAD_REQUEST);
+        }
+
+        LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
+        if(loginInfo == null) {
+            return new ResponseEntity<>("/user/login", httpHeaders, HttpStatus.BAD_REQUEST);
+        }
+
+        log.info(loginInfo);
+
+        itemEntity.setUserIdx(loginInfo.getUserIdx());
+        itemEntity.setWriteDate(Util.getCurrentTimestamp());
+
+        log.info(itemEntity);
+        int result = itemWriteService.writeItem(itemEntity);
+
+        return new ResponseEntity<>("/board/list", httpHeaders, HttpStatus.OK);
     }
 
     @PostMapping("/upload")
@@ -87,7 +111,8 @@ public class ItemWriterController {
             // 파일 이름에 대한 MultipartFile 객체 가져오기
             MultipartFile mFile = multipartRequest.getFile(fileName);
             // 실제 파일 이름 가져오기
-            String originalFileName=mFile.getOriginalFilename();
+            //String originalFileName = mFile.getOriginalFilename();
+            String originalFileName = "T"+ Util.getCurrentTimestamp() + "." +mFile.getContentType().split("/")[1];
             // 파일 이름을 하나씩 fileList에 저장하기
             fileList.add(originalFileName);
 
