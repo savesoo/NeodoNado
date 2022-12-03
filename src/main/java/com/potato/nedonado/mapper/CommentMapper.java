@@ -13,5 +13,6 @@ public interface CommentMapper {
 
     List<CommentDTO> selectCommentByLastCommentIdxLimit(long boardIdx, long lastIdx);
     List<CommentDTO> selectCommentByLastCommentIdx(long boardIdx, long lastIdx);
+    int deleteComment(long commentIdx, long userIdx);
 
 }

@@ -20,20 +20,20 @@ public class CommentListService {
     }
 
     public List<CommentViewInfo> selectBoardComment(long boardIdx, long lastIdx){
-        List<CommentDTO> entitys = commentMapper.selectCommentByLastCommentIdx(boardIdx, lastIdx);
+        List<CommentDTO> entities = commentMapper.selectCommentByLastCommentIdx(boardIdx, lastIdx);
         List<CommentViewInfo> list = new ArrayList<>();
 
-        for(CommentDTO comment : entitys) {
+        for(CommentDTO comment : entities) {
             list.add(comment.toCommentView());
         }
         return list;
     }
 
     public List<CommentViewInfo> selectBoardCommentLimit(long boardIdx, long lastIdx){
-        List<CommentDTO> entitys = commentMapper.selectCommentByLastCommentIdxLimit(boardIdx, lastIdx);
+        List<CommentDTO> entities = commentMapper.selectCommentByLastCommentIdxLimit(boardIdx, lastIdx);
         List<CommentViewInfo> list = new ArrayList<>();
 
-        for(CommentDTO comment : entitys) {
+        for(CommentDTO comment : entities) {
             list.add(comment.toCommentView());
         }
         return list;

@@ -13,8 +13,9 @@
 <body>
     <div id="commentListDiv">
         <c:forEach items="${commentList}" var="comment">
-            <div class="row">
-                <div>${comment.nickname} / ${comment.writeDate}</div>
+            <div class="row" id="row-${comment.commentIdx}">
+                <div>${comment.nickname} / ${comment.writeDate} <c:if test="${loginInfo.userIdx == comment.userIdx}"><input
+                        type="button" value="삭제" onclick="deleteComment(${comment.commentIdx})"></c:if> </div>
                 <div>${comment.content}</div>
             </div>
         </c:forEach>
@@ -61,7 +62,7 @@
                     boardIdx : ${item.boardIdx},
                     content: commentText.value
                 };
-                axios.post('/comment/write/'+document.querySelector('#lastCommentIdx').value, data)
+                axios.post('/comment/'+document.querySelector('#lastCommentIdx').value, data)
                     .then(function (response){
                         let obj = response.data;
                         appendCommentRow(obj);
@@ -71,7 +72,7 @@
             document.querySelector('#nextComment').addEventListener('click', (e) => {
                 let lastIdx = document.querySelector('#lastCommentIdx').value;
                 const z = ${item.boardIdx}
-                axios('/comment/list/'+z+'/'+lastIdx)
+                axios('/comment/'+z+'/'+lastIdx)
                     .then(function(response){
                         let obj = response.data;
                         appendCommentRow(obj);
@@ -79,9 +80,21 @@
             });
         });
 
-        function makeCommentRow(nickname, content, writeDate) {
-            return '<div>'+nickname+' / '+writeDate+'</div>'
-                +'<div>'+content+'</div>';
+        function deleteComment(idx){
+            if(!confirm('댓글을 삭제하시겠습니까?\r\n삭제한 댓글은 복구할 수 없습니다.')) return;
+            axios.delete('/comment/'+idx)
+                .then(function(response) {
+                    if(response.data > 0) document.querySelector('#row-'+idx).remove();
+                });
+        }
+
+        function makeCommentRow(nickname, content, writeDate, commentUserIdx, commentIdx) {
+            let deleteBtn = '<input type="button" value="삭제" onclick="deleteComment('+commentIdx+')"/>';
+            let appendTag = '<div>'+nickname+' / '+writeDate + ' ';
+            appendTag += commentUserIdx == ${loginInfo.userIdx} ? deleteBtn : '';
+            appendTag += '</div>';
+            appendTag += '<div>'+content+'</div>';
+            return appendTag;
         }
 
         function appendCommentRow(obj) {
@@ -91,14 +104,15 @@
             } else {
                 // 여기서 append 시켜줘야 함
                 document.querySelector('#nextComment').style.visibility = 'visible';
-                let appendHtml = '';
-                let div = document.createElement('div');
-                div.setAttribute('class', 'row');
                 obj.forEach((e) => {
-                    appendHtml += makeCommentRow(e.nickname, e.content, e.writeDate);
+                    let appendHtml = '';
+                    let div = document.createElement('div');
+                    div.setAttribute('class', 'row');
+                    div.setAttribute('id', 'row-'+e.commentIdx);
+                    appendHtml += makeCommentRow(e.nickname, e.content, e.writeDate, e.userIdx, e.commentIdx);
+                    div.innerHTML = appendHtml;
+                    document.querySelector('#commentListDiv').appendChild(div);
                 });
-                div.innerHTML = appendHtml;
-                document.querySelector('#commentListDiv').appendChild(div);
                 document.querySelector('#lastCommentIdx').value = obj[obj.length-1].commentIdx;
             }
         }

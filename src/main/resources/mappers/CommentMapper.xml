@@ -24,7 +24,7 @@
         WHERE boardIdx = #{param1}
         AND commentIdx > #{param2}
         ORDER BY commentIdx ASC
-        LIMIT 0, 1
+        LIMIT 0, 50
     </select>
 
     <select id="selectCommentByLastCommentIdx"
@@ -35,6 +35,12 @@
         AND commentIdx > #{param2}
         ORDER BY commentIdx ASC
     </select>
+
+    <delete id="deleteComment">
+        DELETE FROM boardComment
+        WHERE commentIdx = #{param1}
+        AND userIdx = #{param2}
+    </delete>
 
     <insert id="insertComment"
             parameterType="com.potato.nedonado.model.comment.CommentDTO">
