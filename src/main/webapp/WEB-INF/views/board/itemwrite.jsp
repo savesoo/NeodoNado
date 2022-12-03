@@ -64,6 +64,8 @@
             <input type="button" value="작성" id="itemSubmit">
         </form>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             let bytes = 0;
@@ -151,7 +153,7 @@
                     alert("파일은 최대 5개 까지 업로드 가능합니다.");
                     return;
                 }
-                let form_data = new FormData();
+                let uploadFileData = new FormData();
                 for (i = 0; i < files_obj.length; i++) {
                     let fileNames = files_obj[i].name.split('.');
                     if(fileNames[fileNames.length - 1].toUpperCase() != 'PNG'
@@ -160,14 +162,12 @@
                         alert('이미지 파일만 업로드 가능합니다. 다시 확인해주세요.')
                         return;
                     }
-                    form_data.append('file' + i, files_obj[i]);
+                    uploadFileData.append('file' + i, files_obj[i]);
                 }
-                let xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "/board/write/upload", true);
-                xhttp.onload = function (event) {
-                    if (xhttp.status == 200) {
+                axios.post('/board/write/upload', uploadFileData)
+                    .then(function(response){
                         let opt = '';
-                        let obj = JSON.parse(xhttp.response);
+                        obj = response.data;
                         console.log(obj.fileList)
                         obj.fileList.forEach(e => fileList.push(e));
                         fileList.forEach(e => {opt += '<option value="' + e + '">' + e + '</option>';});
@@ -178,12 +178,10 @@
                             document.querySelector('#fileList').innerHTML = opt;
                             document.querySelector('#fileCnt').innerText = fileCnt;
                         }
-                    } else {
-                        alert("Error " + xhttp.status + " occurred when trying to upload your file.");
-                    }
-                }
-
-                xhttp.send(form_data);
+                    })
+                    .catch(function (error) {
+                        alert("Error!!!\r\n occurred when trying to upload your file.\r\n" + error);
+                    });
             }
         }
     </script>

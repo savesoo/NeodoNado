@@ -37,15 +37,15 @@
             <input type="button" id="nextItems" class="btn" value="▼"/>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#nextItems').addEventListener('click', (e) => {
                 let itemIdx = document.querySelector('#lastItemIdx').value;
-                let xhttp = new XMLHttpRequest();
-                xhttp.open('GET', '/board/list/'+itemIdx, true);
-                xhttp.onload = function (event) {
-                    if (xhttp.status == 200) {
-                        let obj = JSON.parse(xhttp.response);
+                axios('/board/list/'+itemIdx)
+                    .then(function(response){
+                        let obj = response.data;
                         if(obj.length == 0) {
                             // 안보이게 처리
                             document.querySelector('#nextItems').style.visibility = 'hidden';
@@ -61,10 +61,7 @@
                             document.querySelector('#itemListDiv').appendChild(div);
                             document.querySelector('#lastItemIdx').value = obj[obj.length-1].boardIdx;
                         }
-                    }
-                }
-
-                xhttp.send();
+                    });
             });
         });
 
