@@ -10,26 +10,7 @@
 <html>
     <head>
         <title>Title</title>
-        <style>
-            #dropFileZone {
-                background-color: #EEE;
-                border: #999 5px dashed;
-                width: 290px;
-                height: 200px;
-                padding: 8px;
-                font-size: 18px;
-            }
-            #dragUploadFile {
-                width:50%;
-                margin:0 auto;
-            }
-            #dragUploadFile p {
-                text-align: center;
-            }
-            #dragUploadFile #selectFile {
-                display: none;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="/resources/css/drop.css"/>
     </head>
     <body>
         <form method="post" enctype="multipart/form-data">
@@ -66,6 +47,8 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/resources/js/drop.js"></script>
+    <script src="/resources/js/textLenCheck.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             let bytes = 0;
@@ -77,44 +60,18 @@
                 document.querySelector('#contentByte').innerText = bytes;
             });
 
-            //이미지 파일 드래그 & 드롭 시키는 영역
-            document.querySelector('#dropFileZone').addEventListener('drop', (event) => {
-                event.preventDefault();
-                ajaxFileUpload(event.dataTransfer.files);
-            });
-
-            // 탐색 창 포출하는 영역
-            document.querySelector('#fileExplorer').addEventListener('click', (event) =>{
-                document.querySelector('#selectFile').click();
-                document.querySelector('#selectFile').onchange = function () {
-                    ajaxFileUpload(document.querySelector('#selectFile').files);
-                };
-            });
-
             // submit(글작성)
             document.querySelector('#itemSubmit').addEventListener('click', (event) => {
                 const title = document.querySelector('#title');
                 const content = document.querySelector('#content');
                 const price = document.querySelector('#price');
 
-                if(title.value == '' || title.value.trim() == '' || getTextByte(title.value) > 100) {
-                    alert('게시글 제목을 다시 확인 해주세요.\r\n' +
-                        '현재 작성한 글자 수('+getTextByte(title.value)+'/100)');
-                    title.focus();
+                if(!checkTextLenAndAlert(title, '게시글 제목', 100)
+                || !checkTextLenAndAlert(content, '본문 내용', 300)
+                || !checkPriceAndAlert(price)){
                     return;
                 }
-                if(content.value == '' || content.value.trim() == '' || getTextByte(content.value) > 300) {
-                    alert('본문 내용을 다시 확인 해주세요.\r\n' +
-                        '현재 작성한 글자 수('+getTextByte(content.value)+'/300)');
-                    content.focus();
-                    return;
-                }
-                if(price.value == '' || price.value.trim() == '' ||
-                    parseInt(price.value) <= 0) {
-                    alert('판매 금액은 필수입니다.');
-                    price.focus();
-                    return;
-                }
+
                 let itemEntity = {
                     title: title.value,
                     content: content.value,
@@ -123,66 +80,16 @@
                     imgURL: fileList.toString(),
                     thumbnail: document.querySelector('#thumbnail').value
                 };
-                let xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '/board/write', true);
-                xhttp.setRequestHeader('Content-type', 'application/json');
-                xhttp.onload = function (event) {
-                    if (xhttp.status == 200) {
-                        location.href=xhttp.responseText;
-                    } else {
-                        alert("Error " + xhttp.status + " occurred when trying to upload your file.");
-                    }
-                }
 
-                xhttp.send(JSON.stringify(itemEntity));
+                axios.post('/board/write', itemEntity)
+                    .then(function (response) {
+                        console.log(response);
+                        location.href= response.data;
+                    }).catch(function (error){
+                        console.log(error);
+                });
             });
 
         });
-
-        // 글자수 확인
-        function getTextByte(str) {
-            return ~-encodeURI(str).split(/%..|./).length;
-        }
-
-        let fileCnt = 0;
-        let fileList = [];
-        // 파일 업로드 작업
-        function ajaxFileUpload(files_obj) {
-            if (files_obj != undefined) {
-                if(files_obj.length + fileCnt > 5) {
-                    alert("파일은 최대 5개 까지 업로드 가능합니다.");
-                    return;
-                }
-                let uploadFileData = new FormData();
-                for (i = 0; i < files_obj.length; i++) {
-                    let fileNames = files_obj[i].name.split('.');
-                    if(fileNames[fileNames.length - 1].toUpperCase() != 'PNG'
-                        && fileNames[fileNames.length - 1].toUpperCase() != 'JPG'
-                        && fileNames[fileNames.length - 1].toUpperCase() != 'GIF' ) {
-                        alert('이미지 파일만 업로드 가능합니다. 다시 확인해주세요.')
-                        return;
-                    }
-                    uploadFileData.append('file' + i, files_obj[i]);
-                }
-                axios.post('/board/write/upload', uploadFileData)
-                    .then(function(response){
-                        let opt = '';
-                        obj = response.data;
-                        console.log(obj.fileList)
-                        obj.fileList.forEach(e => fileList.push(e));
-                        fileList.forEach(e => {opt += '<option value="' + e + '">' + e + '</option>';});
-                        document.querySelector('#thumbnail').value = obj.thumbnail[0];
-
-                        if(opt != '') {
-                            fileCnt += files_obj.length;
-                            document.querySelector('#fileList').innerHTML = opt;
-                            document.querySelector('#fileCnt').innerText = fileCnt;
-                        }
-                    })
-                    .catch(function (error) {
-                        alert("Error!!!\r\n occurred when trying to upload your file.\r\n" + error);
-                    });
-            }
-        }
     </script>
 </html>

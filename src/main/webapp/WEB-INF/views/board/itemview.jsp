@@ -40,7 +40,7 @@
                 <!-- The dots/circles -->
                 <div style="text-align: center; margin-top:-50px;">
                     <c:forEach items="${item.imgURL}" var="url" varStatus="status">
-                        <span class="dot" onclick="currentSlide(${status.count})"></span>
+                        <span class="dot"></span>
                     </c:forEach>
                 </div>
             </div>
@@ -59,6 +59,12 @@
     <tr>
         <td colspan="2">${item.content}</td>
     </tr>
+
+    <c:if test="${loginInfo != null && loginInfo.userIdx == item.userIdx}">
+        <input type="button" value="수정" id="updateItem"/>
+        <input type="button" value="삭제" id="deleteItem"/>
+        <input type="button" value="목록으로" id="listItem"/>
+    </c:if>
 </table>
 
 </body>
@@ -91,5 +97,27 @@
         slides[slideIndex-1].style.display = "block";
         dots[slideIndex-1].className += " active";
     }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('#updateItem').addEventListener('click', (event)=>{
+            location.href='/board/update/'+${item.boardIdx};
+        });
+        document.querySelector('#listItem').addEventListener('click', (event)=>{
+            location.href='/board/list';
+        });
+        document.querySelector('#deleteItem').addEventListener('click', (event)=>{
+            if(!confirm('게시글을 삭제 하시겠습니까?\r\n삭제한 게시글은 복구할 수 없습니다.')) return;
+            axios.get('/board/delete/'+${item.boardIdx})
+                .then(function(response) {
+                    if(response.data != '')
+                        location.href = response.data;
+                    else
+                        alert('게시글 삭제 실패!');
+                });
+        });
+    });
 </script>
 </html>

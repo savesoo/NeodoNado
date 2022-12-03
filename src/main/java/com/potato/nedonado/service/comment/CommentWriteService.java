@@ -14,12 +14,5 @@ public class CommentWriteService {
     @Autowired(required = false)
     private CommentMapper commentMapper;
 
-    public List<CommentDTO> selectAllComments(int boardIdx){
-
-        ItemEntity item = ItemEntity.builder().boardIdx(boardIdx).build();
-
-        return commentMapper.selectAllComments(boardIdx);
-    }
-
 
 }

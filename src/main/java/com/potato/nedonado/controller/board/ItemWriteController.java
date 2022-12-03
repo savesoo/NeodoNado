@@ -29,7 +29,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @RequestMapping("/board/write")
-public class ItemWriterController {
+public class ItemWriteController {
     @Autowired
     ItemWriteService itemWriteService;
 

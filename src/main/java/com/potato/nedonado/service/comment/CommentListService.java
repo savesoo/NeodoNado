@@ -14,5 +14,8 @@ public class CommentListService {
     @Autowired(required = false)
     private CommentMapper commentMapper;
 
+    public List<CommentDTO> selectAllComments(int boardIdx){
+        return commentMapper.selectAllComments(boardIdx);
+    }
 
 }

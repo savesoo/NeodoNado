@@ -19,7 +19,6 @@
         VALUES (#{title}, #{content}, #{category}, #{thumbnail}, #{imgURL}, #{price}, #{userIdx}, #{writeDate})
     </insert>
 
-
     <select id="selectItemByIdx"
         resultType="com.potato.nedonado.model.board.ItemEntity">
         SELECT *
@@ -41,4 +40,18 @@
         ORDER BY boardIdx DESC
         LIMIT 0, 2
     </select>
+
+    <delete id="deleteByIdx">
+        DELETE FROM board
+        WHERE boardIdx = #{param1}
+        AND userIdx = #{param2}
+    </delete>
+
+    <insert id="updateItem"
+            parameterType="com.potato.nedonado.model.board.ItemEntity">
+        UPDATE board
+        SET title = #{title}, content = #{content}, category = #{category}, thumbnail = #{thumbnail}, imgURL = #{imgURL}, price = #{price}
+        WHERE boardIdx = #{boardIdx}
+        AND userIdx = #{userIdx}
+    </insert>
 </mapper>

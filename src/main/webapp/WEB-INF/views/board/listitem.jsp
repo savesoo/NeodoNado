@@ -19,7 +19,12 @@
                     <a href="/board/view/${item.boardIdx}">
                         <div name="item" value="${item.boardIdx}">
                             <div>
-                                <img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
+                                <c:if test="${item.thumbnail == ''}">
+                                    <img src="/resources/files/default.jpg" style="width: 120px; height: 120px" />
+                                </c:if>
+                                <c:if test="${item.thumbnail != ''}">
+                                    <img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
+                                </c:if>
                             </div>
                             <div>
                                 ${item.title} <br/>
