@@ -14,4 +14,8 @@ public class CommentDeleteService {
     public int deleteComment(long commentIdx, long userIdx) {
         return commentMapper.deleteComment(commentIdx, userIdx);
     }
+
+    public int deleteCommentByBoardIdx(long boardIdx) {
+        return commentMapper.deleteCommentByBoardIdx(boardIdx);
+    }
 }

@@ -15,4 +15,8 @@ public class ItemViewService {
     public ItemEntity selectItemByIdx(long idx) {
         return boardMapper.selectItemByIdx(idx);
     }
+
+    public ItemEntity selectItemByIdxAndUserIdx(long idx, long userIdx) {
+        return boardMapper.selectItemByIdxAndUserIdx(idx, userIdx);
+    }
 }

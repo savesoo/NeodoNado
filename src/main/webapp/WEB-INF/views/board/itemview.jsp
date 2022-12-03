@@ -103,14 +103,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#updateItem').addEventListener('click', (event)=>{
-            location.href='/board/update/'+${item.boardIdx};
+            location.href='/app/v1/item/'+${item.boardIdx} + '/'+${loginInfo.userIdx};
         });
         document.querySelector('#listItem').addEventListener('click', (event)=>{
-            location.href='/board/list';
+            location.href='/app/v1/item/list';
         });
         document.querySelector('#deleteItem').addEventListener('click', (event)=>{
             if(!confirm('게시글을 삭제 하시겠습니까?\r\n삭제한 게시글은 복구할 수 없습니다.')) return;
-            axios.get('/board/delete/'+${item.boardIdx})
+            axios.delete('/app/v1/item/'+${item.boardIdx})
                 .then(function(response) {
                     if(response.data != '')
                         location.href = response.data;

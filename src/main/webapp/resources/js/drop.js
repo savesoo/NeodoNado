@@ -36,7 +36,7 @@ function ajaxFileUpload(files_obj) {
             }
             uploadFileData.append('file' + i, files_obj[i]);
         }
-        axios.post('/board/write/upload', uploadFileData)
+        axios.post('/app/v1/item/upload', uploadFileData)
             .then(function (response) {
                 let opt = '';
                 obj = response.data;

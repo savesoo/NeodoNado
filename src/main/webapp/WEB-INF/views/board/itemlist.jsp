@@ -16,7 +16,7 @@
         <div class="container" id="itemListDiv">
             <c:forEach items="${itemList}" var="item">
                 <div class="row">
-                    <a href="/board/view/${item.boardIdx}">
+                    <a href="/app/v1/item/${item.boardIdx}">
                         <div name="item" value="${item.boardIdx}">
                             <div>
                                 <c:if test="${item.thumbnail == ''}">
@@ -46,7 +46,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#nextItems').addEventListener('click', (e) => {
                 let itemIdx = document.querySelector('#lastItemIdx').value;
-                axios('/board/list/'+itemIdx)
+                axios('/app/v1/item/list/'+itemIdx)
                     .then(function(response){
                         let obj = response.data;
                         if(obj.length == 0) {
@@ -69,7 +69,7 @@
         });
 
         function makeItemRow(idx, thumbnail, title, price, writeDate) {
-            return '<a href="/board/view/'+idx+'">'
+            return '<a href="/app/v1/item/'+idx+'">'
             +'	<div name="item" value="'+idx+'">'
             +'		<div>'
             +'			<img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/'+thumbnail+'" />'

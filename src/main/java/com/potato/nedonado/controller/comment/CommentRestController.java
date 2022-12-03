@@ -19,7 +19,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/app/v1/comment")
 public class CommentRestController {
     @Autowired
     CommentWriteService commentWriteService;

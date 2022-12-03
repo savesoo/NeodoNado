@@ -42,6 +42,11 @@
         AND userIdx = #{param2}
     </delete>
 
+    <delete id="deleteCommentByBoardIdx">
+        DELETE FROM boardComment
+        WHERE boardIdx = #{boardIdx}
+    </delete>
+
     <insert id="insertComment"
             parameterType="com.potato.nedonado.model.comment.CommentDTO">
         INSERT INTO boardComment(boardIdx, userIdx, nickname, content, writeDate)

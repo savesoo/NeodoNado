@@ -62,7 +62,7 @@
                     boardIdx : ${item.boardIdx},
                     content: commentText.value
                 };
-                axios.post('/comment/'+document.querySelector('#lastCommentIdx').value, data)
+                axios.post('/app/v1/comment/'+document.querySelector('#lastCommentIdx').value, data)
                     .then(function (response){
                         let obj = response.data;
                         appendCommentRow(obj);
@@ -71,8 +71,7 @@
 
             document.querySelector('#nextComment').addEventListener('click', (e) => {
                 let lastIdx = document.querySelector('#lastCommentIdx').value;
-                const z = ${item.boardIdx}
-                axios('/comment/'+z+'/'+lastIdx)
+                axios('/app/v1/comment/${item.boardIdx}/'+lastIdx)
                     .then(function(response){
                         let obj = response.data;
                         appendCommentRow(obj);
@@ -82,7 +81,7 @@
 
         function deleteComment(idx){
             if(!confirm('댓글을 삭제하시겠습니까?\r\n삭제한 댓글은 복구할 수 없습니다.')) return;
-            axios.delete('/comment/'+idx)
+            axios.delete('/app/v1/comment/'+idx)
                 .then(function(response) {
                     if(response.data > 0) document.querySelector('#row-'+idx).remove();
                 });

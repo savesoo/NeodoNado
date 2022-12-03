@@ -13,6 +13,8 @@ public interface BoardMapper {
 
     ItemEntity selectItemByIdx(long boardIdx);
 
+    ItemEntity selectItemByIdxAndUserIdx(long boardIdx, long userIdx);
+
     List<ItemEntity> selectItemListByItemIdx(long boardIdx);
 
     int deleteByIdx(long boardIdx, long userIdx);

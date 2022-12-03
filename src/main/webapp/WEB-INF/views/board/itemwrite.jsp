@@ -81,7 +81,7 @@
                     thumbnail: document.querySelector('#thumbnail').value
                 };
 
-                axios.post('/board/write', itemEntity)
+                axios.post('/app/v1/item', itemEntity)
                     .then(function (response) {
                         console.log(response);
                         location.href= response.data;

@@ -91,7 +91,7 @@
                 thumbnail: document.querySelector('#thumbnail').value
             };
 
-            axios.post('/board/update', itemEntity)
+            axios.post('/app/v1/item/${item.boardIdx}', itemEntity)
                 .then(function (response) {
                     console.log(response);
                     if(response.data.msg != null)

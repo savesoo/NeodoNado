@@ -26,6 +26,14 @@
         WHERE boardIdx = #{boardIdx}
     </select>
 
+    <select id="selectItemByIdxAndUserIdx"
+        resultType="com.potato.nedonado.model.board.ItemEntity">
+        SELECT *
+        FROM board
+        WHERE boardIdx = #{param1}
+        AND userIdx = #{param2}
+    </select>
+
 
     <select id="selectItemListByItemIdx"
             resultType="com.potato.nedonado.model.board.ItemEntity">
