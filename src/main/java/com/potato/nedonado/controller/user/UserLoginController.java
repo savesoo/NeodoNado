@@ -37,7 +37,7 @@ public class UserLoginController {
         // 로그인 상태 체크
         if(session.getAttribute("loginInfo")!=null){
 
-            return "redirect:/board/list";
+            return "redirect:/app/v1/item/list";
             //return "redirect:/user/mypage"; // 임시루트
 
         }
@@ -96,7 +96,7 @@ public class UserLoginController {
         session.setAttribute("loginInfo", user.loginData());
 
 
-        return "redirect:/board/list"; //최종반영
+        return "redirect:/app/v1/item/list"; //최종반영
 
         //return "redirect:/user/mypage"; // 임시루트
 
