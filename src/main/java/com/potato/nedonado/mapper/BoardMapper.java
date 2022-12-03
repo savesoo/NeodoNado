@@ -7,9 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    List<ItemEntity> selectItemList(int page);
+    List<ItemEntity> selectItemListByPage(int page);
 
     int insertItem(ItemEntity itemEntity);
 
     ItemEntity selectItemByIdx(long boardIdx);
+
+    List<ItemEntity> selectItemListByItemIdx(long boardIdx);
 }

@@ -4,13 +4,13 @@
 
 <mapper namespace="com.potato.nedonado.mapper.BoardMapper">
 
-    <select id="selectItemList"
+    <select id="selectItemListByPage"
     resultType="com.potato.nedonado.model.board.ItemEntity">
         SELECT *
         FROM board
         WHERE onSale != 0
         ORDER BY boardIdx DESC
-        LIMIT #{page}, 20
+        LIMIT #{page}, 2
     </select>
 
     <insert id="insertItem"
@@ -25,5 +25,20 @@
         SELECT *
         FROM board
         WHERE boardIdx = #{boardIdx}
+    </select>
+
+
+    <select id="selectItemListByItemIdx"
+            resultType="com.potato.nedonado.model.board.ItemEntity">
+        SELECT *
+        FROM board
+        <where>
+            onSale != 0
+            <if test="boardIdx != 0">
+                and boardIdx &lt; #{boardIdx}
+            </if>
+        </where>
+        ORDER BY boardIdx DESC
+        LIMIT 0, 2
     </select>
 </mapper>

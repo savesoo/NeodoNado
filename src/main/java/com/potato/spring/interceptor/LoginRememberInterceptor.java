@@ -29,7 +29,7 @@ public class LoginRememberInterceptor implements HandlerInterceptor {
         // 세션 체크
         HttpSession session = request.getSession(false);
 
-        if (session ==null || session.getAttribute("loginInfo")==null) {
+        if (session == null || session.getAttribute("loginInfo")==null) {
 
             // 쿠키 체크
             Cookie cookie = findCookie(request.getCookies(), "uuid");
