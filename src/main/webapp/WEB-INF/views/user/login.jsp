@@ -45,10 +45,8 @@
                 </label>
             </div>
 
-            <div>
-                <button class="w-100 btn btn-lg btn-outline-success p-1" style="margin: 2px" type="submit">로그인</button>
-                <button href="/user/register" class="w-100 btn btn-lg btn-outline-secondary p-1" style="margin: 2px">회원 가입</button>
-            </div>
+            <button class="w-100 btn btn-lg btn-outline-success p-1" style="margin: 2px" type="submit">로그인</button>
+            <a href="/user/register" class="w-100 btn btn-lg btn-outline-secondary p-1" style="margin: 2px">회원 가입</a>
 
 
             <p class="mt-5 mb-3 text-muted">&copy; 2022~</p>
