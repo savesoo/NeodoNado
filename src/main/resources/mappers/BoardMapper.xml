@@ -10,7 +10,7 @@
         FROM board
         WHERE onSale != 0
         ORDER BY boardIdx DESC
-        LIMIT #{page}, 2
+        LIMIT #{page}, 10
     </select>
 
     <insert id="insertItem"
@@ -38,7 +38,7 @@
             </if>
         </where>
         ORDER BY boardIdx DESC
-        LIMIT 0, 2
+        LIMIT 0, 10
     </select>
 
     <delete id="deleteByIdx">

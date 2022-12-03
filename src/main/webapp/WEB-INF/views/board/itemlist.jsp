@@ -36,9 +36,7 @@
             </c:forEach>
         </div>
         <div>
-            <c:if test="${itemList != null}">
-                <input type="hidden" id="lastItemIdx" value="${itemList[itemList.size()-1].boardIdx}"/>
-            </c:if>
+            <input type="hidden" id="lastItemIdx" value="${itemList.size() > 0 ? itemList[itemList.size()-1].boardIdx : 0}"/>
             <input type="button" id="nextItems" class="btn" value="▼"/>
         </div>
     </body>

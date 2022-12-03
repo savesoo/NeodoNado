@@ -1,6 +1,5 @@
 package com.potato.nedonado.controller.board;
 
-import com.potato.nedonado.model.board.ItemViewInfo;
 import com.potato.nedonado.model.board.ItemViewListInfo;
 import com.potato.nedonado.service.board.ItemListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class ItemListController {
     public ModelAndView getBoardList(){
         ModelAndView mav = new ModelAndView();
         mav.addObject("itemList", service.selectBoardListByPage(0));
-        mav.setViewName("/board/listitem");
+        mav.setViewName("/board/itemlist");
         return mav;
     }
 

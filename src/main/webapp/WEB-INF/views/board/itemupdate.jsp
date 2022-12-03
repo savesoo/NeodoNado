@@ -94,7 +94,10 @@
             axios.post('/board/update', itemEntity)
                 .then(function (response) {
                     console.log(response);
-                    location.href= response.data.url;
+                    if(response.data.msg != null)
+                        alert(response.data.msg);
+                    if(response.data.url != null)
+                        location.href= response.data.url;
                 }).catch(function (error){
                 console.log(error);
             });

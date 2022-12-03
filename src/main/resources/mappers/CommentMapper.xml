@@ -5,9 +5,41 @@
 <mapper namespace="com.potato.nedonado.mapper.CommentMapper">
 
     <select id="selectAllComments" resultType="com.potato.nedonado.model.comment.CommentDTO">
-        select * from comment where #boardIdx=#{boardIdx}
+        select * from boardComment where #boardIdx=#{boardIdx}
     </select>
 
+    <select id="selectByBoardIdx"
+            resultType="com.potato.nedonado.model.comment.CommentDTO">
+        SELECT *
+        FROM boardComment
+        WHERE boardIdx = #{boardIdx}
+        ORDER BY commentIdx ASC
+        LIMIT 0, 50
+    </select>
 
+    <select id="selectCommentByLastCommentIdxLimit"
+            resultType="com.potato.nedonado.model.comment.CommentDTO">
+        SELECT *
+        FROM boardComment
+        WHERE boardIdx = #{param1}
+        AND commentIdx > #{param2}
+        ORDER BY commentIdx ASC
+        LIMIT 0, 1
+    </select>
+
+    <select id="selectCommentByLastCommentIdx"
+            resultType="com.potato.nedonado.model.comment.CommentDTO">
+        SELECT *
+        FROM boardComment
+        WHERE boardIdx = #{param1}
+        AND commentIdx > #{param2}
+        ORDER BY commentIdx ASC
+    </select>
+
+    <insert id="insertComment"
+            parameterType="com.potato.nedonado.model.comment.CommentDTO">
+        INSERT INTO boardComment(boardIdx, userIdx, nickname, content, writeDate)
+        VALUES (#{boardIdx}, #{userIdx}, #{nickname}, #{content}, #{writeDate})
+    </insert>
 
 </mapper>

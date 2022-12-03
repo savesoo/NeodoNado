@@ -7,12 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
+    List<CommentDTO> selectCommentByBoardIdx(long boardIdx);
 
-    // 게시글에 달린 전체 코멘트 불러오기
-    List<CommentDTO> selectAllComments(int boardIdx);
+    int insertComment(CommentDTO commentDTO);
 
-    // 댓글 작성
-    
-
+    List<CommentDTO> selectCommentByLastCommentIdxLimit(long boardIdx, long lastIdx);
+    List<CommentDTO> selectCommentByLastCommentIdx(long boardIdx, long lastIdx);
 
 }

@@ -1,6 +1,5 @@
 package com.potato.nedonado.model.comment;
 
-import com.potato.nedonado.util.Util;
 import lombok.*;
 
 @AllArgsConstructor
@@ -9,16 +8,14 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class CommentDTO {
+public class CommentViewInfo {
 
     private long commentIdx;
     private long boardIdx;
     private long userIdx;
     private String nickname;
     private  String content;
-    private long writeDate;
+    private String writeDate;
 
-    public CommentViewInfo toCommentView(){
-        return new CommentViewInfo(commentIdx, boardIdx, userIdx, nickname, content, Util.convertLongTimestampToString(writeDate));
-    }
+
 }

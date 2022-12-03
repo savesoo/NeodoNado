@@ -66,7 +66,7 @@
         <input type="button" value="목록으로" id="listItem"/>
     </c:if>
 </table>
-
+<%@include file="../comment/comment.jsp"%>
 </body>
 <script>
     let slideIndex = 1;
