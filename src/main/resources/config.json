@@ -1,8 +1,8 @@
 {
 	"maxUploadImg" : 5,
 	"resourcesURI": "/resouces/profile/",
-	"fileSaveDir": "C:\\Users\\E495\\Documents\\GitHub\\miniproject2\\newpotato\\src\\main\\webapp\\resources\\files\\img",
-	"defaultDir": "C:\\Users\\E495\\Documents\\GitHub\\miniproject2\\newpotato\\src\\main\\webapp\\resources\\files",
+	"fileSaveDir": "C:\\Users\\LG\\Documents\\himidea_fullstack\\dev\\persnalProject\\NeodoNado\\src\\main\\webapp\\resources\\files\\img",
+	"defaultDir": "C:\\Users\\LG\\Documents\\himidea_fullstack\\dev\\persnalProject\\NeodoNado\\src\\main\\webapp\\resources\\files",
 	"imgURL" : "/resources/files/img",
 	"titleSize" : 200,
 	"contentSize" : 300,
