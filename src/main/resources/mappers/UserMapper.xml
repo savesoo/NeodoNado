@@ -6,8 +6,8 @@
 
     <!-- 가입 -->
     <insert id="insertUser" parameterType="com.potato.nedonado.model.user.UserDTO">
-        insert into user (userId, userPw, joinDate, location, nickname, phone, bYear, bMonth, bDay)
-        values (#{userId}, #{userPw}, #{joinDate}, #{location}, #{nickname}, #{phone}, #{bYear}, #{bMonth}, #{bDay})
+        insert into user (userId, userPw, joinDate, location, nickname, phone, byear, bmonth, bday)
+        values (#{userId}, #{userPw}, #{joinDate}, #{location}, #{nickname}, #{phone}, #{byear}, #{bmonth}, #{bday})
     </insert>
 
     <!-- id, pw 확인후 로그인 -->
