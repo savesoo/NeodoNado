@@ -23,53 +23,56 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
 
+        <!-- Custom styles for this template -->
+        <link href="/resources/css/register.css" rel="stylesheet">
+
     </head>
     <body >
 
         <div class="container">
             <div class="input-form-backgroud row">
-                <div class="input-form col-md-12 mx-auto p-4">
-                    <h4 class="mb-3 p-4">회원가입</h4>
+                <div class="input-form col-md-12 mx-auto">
+                    <h4 class="mb-3">회원가입</h4>
                     <form method="post" class="validation-form" novalidate>
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="form-group mb-2">
                             <label for="userId" class="form-label mt-4">아이디</label>
                             <input type="text" class="form-control" id="userId" name="userId" aria-describedby="emailHelp" required>
                             <div class="invalid-feedback"> 아이디를 입력해주세요. </div>
                         </div>
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="form-group mb-2">
                             <label class="form-label mt-4" for="userPw">비밀번호</label>
                             <input type="password" class="form-control" id="userPw" name="userPw" required>
                             <div class="valid-feedback"></div>
                         </div>
 
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="form-group mb-2">
                             <label class="form-label mt-4" for="inputInvalid">비밀번호 재확인</label>
                             <input type="password" class="form-control" id="inputInvalid">
                             <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
                         </div>
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="form-group mb-2">
                             <label for="nickname" class="form-label mt-4">닉네임</label>
                             <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" required>
                             <div class="invalid-feedback"> 닉네임을 입력해주세요. </div>
                         </div>
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="form-group mb-2">
                             <label for="location" class="form-label mt-4">거주 지역</label>
                             <input type="text" class="form-control" id="location" name="location" placeholder="ex) 노원구, 서초구 " maxlength="5" required>
                             <div class="invalid-feedback"> 거주 지역을 입력해주세요. </div>
                         </div>
-                        <div class="form-group col-md-6 mb-2">
+                        <div class="form-group mb-2">
                             <label for="phone" class="form-label mt-4">연락처 </label>
                             <input type="text" class="form-control" id="phone">
                         </div>
 
-                        <div class ="bir_wrap col-md-6 mb-3">
+                        <div class ="bir_wrap mb-2">
                             <label class="form-label mt-4 mb-3">생년월일</label>
-                            <div class="bir_yy mb-3">
+                            <div class="bir_yy">
                                 <span class="ps_box">
                                     <input type="text" class="form-control" id="byear" name="byear" placeholder="태어난 년도(4자리)" maxlength="4">
                                 </span>
                             </div>
-                            <div class="bir_mm mb-3">
+                            <div class="bir_mm">
                                 <span class="ps_box focus">
                                     <select class="form-select form-control" id="bmonth" name="bmonth" >
                                         <option>태어난 달(월)</option>
@@ -88,13 +91,13 @@
                                      </select>
                                 </span>
                             </div>
-                            <div class="bir_dd mb-3">
+                            <div class="bir_dd">
                                 <span class="ps_box">
                                     <input type ="text" class="form-control" id ="bday" name="bday" placeholder="태어난 날짜" maxlength="2">
                                 </span>
                             </div>
                         </div>
-                        <div class="d-grid gap-2 col-md-6 mb-3">
+                        <div class="d-grid gap-2 mb-3">
                             <button class="btn btn-primary btn-lg btn-block" type="submit">가입하기</button>
                         </div>
 
