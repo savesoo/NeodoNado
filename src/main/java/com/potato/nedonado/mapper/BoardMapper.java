@@ -1,6 +1,8 @@
 package com.potato.nedonado.mapper;
 
 import com.potato.nedonado.model.board.ItemEntity;
+import com.potato.nedonado.model.board.ItemViewInfo;
+import com.potato.nedonado.model.board.ItemViewListInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,4 +21,8 @@ public interface BoardMapper {
 
     int deleteByIdx(long boardIdx, long userIdx);
     int updateItem(ItemEntity itemEntity);
+
+
+    // 내가 쓴 게시글 보기
+    List<ItemEntity> selectItemListByUserIdx(long userIdx);
 }
