@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>회원 가입</title>
+        <title>Signup for NeodoNado!</title>
 
         <!-- Bootstrap core CSS -->
 <%--        <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">--%>
@@ -39,17 +39,18 @@
                             <input type="text" class="form-control" id="userId" name="userId" aria-describedby="emailHelp" required>
                             <div class="invalid-feedback"> 아이디를 입력해주세요. </div>
                         </div>
+
                         <div class="form-group mb-2">
                             <label class="form-label mt-4" for="userPw">비밀번호</label>
                             <input type="password" class="form-control" id="userPw" name="userPw" required>
-                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback"> 비밀번호를 입력해주세요. </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="form-label mt-4" for="rePw">비밀번호 재확인</label>
+                            <input type="password" class="form-control" id="rePw" name="rePw" required>
+                            <div class="invalid-feedback" id="invalidPw">비밀번호가 일치하지 않습니다</div>
                         </div>
 
-                        <div class="form-group mb-2">
-                            <label class="form-label mt-4" for="inputInvalid">비밀번호 재확인</label>
-                            <input type="password" class="form-control" id="inputInvalid">
-                            <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
-                        </div>
                         <div class="form-group mb-2">
                             <label for="nickname" class="form-label mt-4">닉네임</label>
                             <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp" required>
@@ -62,7 +63,7 @@
                         </div>
                         <div class="form-group mb-2">
                             <label for="phone" class="form-label mt-4">연락처 </label>
-                            <input type="text" class="form-control" id="phone">
+                            <input type="text" class="form-control" id="phone" placeholder="-를 제외한 11자리">
                         </div>
 
                         <div class ="bir_wrap mb-2">
@@ -104,7 +105,7 @@
                     </form>
                 </div>
                 <footer class="my-3 text-center text-small">
-                    <p class="mb-1">&copy; 2022 PM</p>
+                    <p class="mb-1">&copy; 2022 NDND</p>
                 </footer>
             </div>
         </div>
@@ -120,11 +121,20 @@
                             event.preventDefault();
                             event.stopPropagation();
                         }
-
                         form.classList.add('was-validated');
+
+                        if(userPw.value!=rePw.value){
+                            rePw.style.borderColor = '#dc3545';
+                            document.querySelector('#invalidPw').style.display = 'block';
+                            alert('비밀번호가 일치하지 않습니다.');
+                            userPw.focus();
+                            return false;
+                        }
                     }, false);
                 });
             }, false);
+
+
         </script>
 
 
