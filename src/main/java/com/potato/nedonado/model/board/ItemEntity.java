@@ -3,6 +3,8 @@ package com.potato.nedonado.model.board;
 import com.potato.nedonado.util.Util;
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -10,16 +12,25 @@ import lombok.*;
 @ToString
 @Builder
 public class ItemEntity {
+    @NotEmpty
     private long boardIdx;
     private int boardCategory;
+
+    @NotEmpty
     private String title;
+    @NotEmpty
     private String content;
+    @NotEmpty
     private int category;
     private String thumbnail;
     private String imgURL;
+    @NotEmpty
     private int onSale;
+    @NotEmpty
     private int price;
+    @NotEmpty
     private long userIdx;
+    @NotEmpty
     private long writeDate;
 
     public ItemViewListInfo toItemViewListInfo(){

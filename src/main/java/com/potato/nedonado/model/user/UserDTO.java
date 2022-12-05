@@ -3,6 +3,9 @@ package com.potato.nedonado.model.user;
 import com.potato.nedonado.util.Util;
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -11,21 +14,27 @@ import lombok.*;
 @Builder
 public class UserDTO {
 
+    @NotEmpty
     private long userIdx;
     private String uuid;
 
+    @NotEmpty
     private String userId;
+    @NotEmpty
     private String userPw;
 
     private String nickname;
     private String nation;
     private String phone;
 
+    @NotEmpty
+    @NotNull
     private String location;
     private int byear;
     private int bmonth;
     private int bday;
 
+    @NotEmpty
     private long joinDate;
     private boolean deleted;
 

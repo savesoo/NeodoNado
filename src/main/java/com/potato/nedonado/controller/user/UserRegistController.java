@@ -46,7 +46,6 @@ public class UserRegistController {
 //        }
 
         log.info(userDTO);
-        log.info(userDTO.getLocation());
 
         userRegistService.insertUser(userDTO);
 
