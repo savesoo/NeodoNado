@@ -23,10 +23,10 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="container p-3">
 
             <div class="main-div mb-2 col-md-12 mx-auto p-5">
-                <h1>내 정보 보기</h1>
+                <h1 class="mb-3 fw-normal">내 정보 보기</h1>
                 <div>
                     <c:if test="${loginInfo != null}">
                         <div class="mydiv mb-3">
@@ -68,6 +68,10 @@
                     </div>
                 </div>
             </div>
+
+            <footer class="my-3 text-center text-small">
+                <p class="mb-1">&copy; 2022 NDND</p>
+            </footer>
 
         </div>
 

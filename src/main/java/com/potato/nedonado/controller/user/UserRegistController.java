@@ -49,7 +49,7 @@ public class UserRegistController {
 
         userRegistService.insertUser(userDTO);
 
-        String message = "회원가입이 완료되었습니다. 로그인을 진행해 주세요.";
+        String message = "너도나도에 가입하신 걸 환영합니다! \n 로그인 화면으로 이동합니다.";
         rttr.addFlashAttribute("regMsg", message);
 
         return "redirect:/login";

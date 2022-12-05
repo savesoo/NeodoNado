@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.104.2">
-        <title>로그인 페이지</title>
+        <title>Welcome to NeodoNado!</title>
 
         <!-- Bootstrap core CSS -->
         <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,8 @@
     <main class="form-signin w-100 m-auto">
         <form method="post">
             <img class="mb-4" src="/resources/img/ps.png" alt="" width="80" height="57">
-            <h1 class="h3 mb-3 fw-normal">로그인 페이지</h1>
+            <h1 class="h3 mb-3 fw-normal">NeodoNado</h1>
+            <p class="text-small">너도나도에서 중고 거래를 즐겨보세요!</p>
 
             <div class="form-floating">
                 <input type="text" class="form-control" id="floatingInput" name="userId" placeholder="ID 입력">
@@ -45,11 +46,11 @@
                 </label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-outline-success p-1" style="margin: 2px" type="submit">로그인</button>
+            <button class="w-100 btn btn-lg btn-outline-primary p-1" style="margin: 2px" type="submit">로그인</button>
             <a href="/register" class="w-100 btn btn-lg btn-outline-secondary p-1" style="margin: 2px">회원 가입</a>
 
 
-            <p class="mt-5 mb-3 text-muted">&copy; 2022~</p>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022 NDND</p>
         </form>
     </main>
 
