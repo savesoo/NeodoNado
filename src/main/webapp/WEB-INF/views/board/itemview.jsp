@@ -6,30 +6,36 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.potato.nedonado.util.ConfigUtil" %>
 <html>
 <head>
     <title>${item.title}</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/slide.css"/>
+    <style>
+        .mySlides.fade:not(.show) { opacity: 1 !important; }
+    </style>
 </head>
 <body>
-<table>
-    <tr>
-        <td colspan="2">
-            <div class="slideshow-container">
+<%@include file="/WEB-INF/views/parts/header.jsp"%>
+<main>
+    <div class="container">
+        <div class="container-lg themed-container text-center">
+            <h2 class="mt-4">${item.title}</h2>
+        </div>
+        <div class="container-lg themed-container text-center">　 </div>
+        <div class="container-lg themed-container text-center">　 </div>
+        <div class="container-lg themed-container text-center">
+            <div class=" slideshow-container">
                 <c:if test="${item.imgURL == ''}">
                     <div class="mySlides fade">
                         <div class="numbertext">1 / 1</div>
-                        <img src="/resources/files/default.jpg"/>
+                        <img src="/resources/files/default.jpg" 500 500 style="width:500px; height:500px;"/>
                         <div class="text">Caption Text</div>
                     </div>
                 </c:if>
                 <c:forEach items="${item.imgURL}" var="url" varStatus="status">
                     <div class="mySlides fade">
-                        <div class="numbertext">${status.count} / 3</div>
                         <img src="${ConfigUtil.getConfig("imgURL")}/${url}" 500 500 style="width:500px; height:500px;"/>
-                            <%--<div class="text">Caption Text</div>--%>
                     </div>
                 </c:forEach>
 
@@ -44,28 +50,38 @@
                     </c:forEach>
                 </div>
             </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">　</td>
-    </tr>
-    <tr>
-        <td colspan="2">${item.title}</td>
-    </tr>
-    <tr>
-        <td>${item.onSale} / ${item.category}</td>
-        <td>${item.price}</td>
-    </tr>
-    <tr>
-        <td colspan="2">${item.content}</td>
-    </tr>
+        </div>
 
-    <c:if test="${loginInfo != null && loginInfo.userIdx == item.userIdx}">
-        <input type="button" value="수정" id="updateItem"/>
-        <input type="button" value="삭제" id="deleteItem"/>
-        <input type="button" value="목록으로" id="listItem"/>
-    </c:if>
-</table>
+        <div class="container-md themed-container text-center" style="margin-top: 50px">
+            <div class="col-md-12 themed-grid-col">
+                <div class="row">
+                    <div class="col-md-4 themed-grid-col">
+                        <strong>${item.price} 원</strong>
+                    </div>
+                    <div class="col-md-4 themed-grid-col">
+                        <strong>${item.category}</strong>
+                    </div>
+                    <div class="col-md-4 themed-grid-col">
+                        <c:if test="${item.userIdx == loginInfo.userIdx}">
+                            <input type="button" class="btn btn-outline-secondary" value="수정" id="updateItem"/>
+                            <input type="button" class="btn btn-outline-danger" value="삭제" id="deleteItem"/>
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 themed-grid-col" >
+                <div class="col-md-4 themed-grid-col">
+                    ${item.onSale}
+                </div>
+            </div>
+        </div>
+        <div class="container-lg themed-container text-center">
+            <div class="col-md-12 themed-grid-col" >
+                <p>${item.content}</p>
+            </div>
+        </div>
+    </div>
+</main>
 <%@include file="../comment/comment.jsp"%>
 </body>
 <script>
@@ -98,15 +114,10 @@
         dots[slideIndex-1].className += " active";
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#updateItem').addEventListener('click', (event)=>{
             location.href='/app/v1/item/'+${item.boardIdx} + '/'+${loginInfo.userIdx};
-        });
-        document.querySelector('#listItem').addEventListener('click', (event)=>{
-            location.href='/app/v1/item/list';
         });
         document.querySelector('#deleteItem').addEventListener('click', (event)=>{
             if(!confirm('게시글을 삭제 하시겠습니까?\r\n삭제한 게시글은 복구할 수 없습니다.')) return;

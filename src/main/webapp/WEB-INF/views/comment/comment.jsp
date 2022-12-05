@@ -6,11 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Comment</title>
-</head>
-<body>
     <div id="commentListDiv">
         <c:forEach items="${commentList}" var="comment">
             <div class="row" id="row-${comment.commentIdx}">
@@ -40,8 +35,6 @@
             </table>
             <input type="button" id="commentSubmit" class="btn" value="작성">
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/resources/js/textLenCheck.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", ()=> {
@@ -117,6 +110,3 @@
         }
 
     </script>
-
-</body>
-</html>

@@ -6,47 +6,71 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.potato.nedonado.util.ConfigUtil" %>
 <html>
     <head>
         <title>NEODONADO SALES</title>
+        <style>
+            .aTag{
+                text-decoration: none;
+                color: #1a1e21;
+            }
+            .row-item {
+                border: 1px solid #cccccc;
+                border-radius: 10px;
+                background: #f5f5f5;
+                padding: 20px;
+            }
+            .row-img {
+                border: 1px solid #cccccc;
+                border-radius: 10px;
+            }
+        </style>
     </head>
     <body>
+    <%@include file="/WEB-INF/views/parts/header.jsp"%>
         <div class="container" id="itemListDiv">
+            <h2 class="mt-4">너도나도 장터</h2>
+            <p>중고 물품을 사고 팔아보세요</p>
+            <div class="container-lg themed-container text-center">　 </div>
+            <div class="container-lg themed-container text-center">　 </div>
             <c:forEach items="${itemList}" var="item">
-                <div class="row">
-                    <a href="/app/v1/item/${item.boardIdx}">
-                        <div name="item" value="${item.boardIdx}">
-                            <div>
-                                <c:if test="${item.thumbnail == ''}">
-                                    <img src="/resources/files/default.jpg" style="width: 120px; height: 120px" />
-                                </c:if>
-                                <c:if test="${item.thumbnail != ''}">
-                                    <img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
-                                </c:if>
+                <a href="/app/v1/item/${item.boardIdx}" class="aTag">
+                    <div name="item" class="row mb-3 text-center row-item">
+                        <div class="col-md-4 themed-grid-col">
+                            <c:if test="${item.thumbnail == ''}">
+                                <img class="row-img" src="/resources/files/default.jpg" />
+                            </c:if>
+                            <c:if test="${item.thumbnail != ''}">
+                                <img class="row-img" src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
+                            </c:if>
+                        </div>
+                        <div class="col-md-8 themed-grid-col">
+                            <div class="pb-3">
+                                <strong>${item.title}</strong>
                             </div>
-                            <div>
-                                ${item.title} <br/>
-                                ${item.price}
+                            <div class="row">
+                                <div class="col-md-6 themed-grid-col">${item.onSale}</div>
+                                <div class="col-md-6 themed-grid-col">${item.writeDate}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 themed-grid-col"></div>
+                                <div class="col-md-6 themed-grid-col"><strong>${item.price} 원</strong></div>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </c:forEach>
         </div>
-        <div class="m-5">
+        <div class="container-lg themed-container text-center">
             <input type="hidden" id="lastItemIdx" value="${itemList.size() > 0 ? itemList[itemList.size()-1].boardIdx : 0}"/>
-            <input type="button" id="nextItems" class="btn" value="▼"/>
+            <input type="button" id="nextItems" class="btn btn-outline-secondary" style="min-width: 100%" value="▼"/>
         </div>
-        <div class="m-5">
-            <input type="button" value="작성" id="insertItem"/>
-            <input type="button" value="수정" id="updateItem"/>
-            <input type="button" value="삭제" id="deleteItem"/>
+        <div class="addItem col-md-1">
+            <a href="/app/v1/item" class="btn btn-secondary">　+　</a>
         </div>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#nextItems').addEventListener('click', (e) => {
@@ -73,17 +97,26 @@
             });
         });
 
-        function makeItemRow(idx, thumbnail, title, price, writeDate) {
+        function makeItemRow(idx, thumbnail, title, price, writeDate, onSale=1) {
             return '<a href="/app/v1/item/'+idx+'">'
-            +'	<div name="item" value="'+idx+'">'
-            +'		<div>'
-            +'			<img src="${ConfigUtil.getConfig("imgURL")}/thumbnail/'+thumbnail+'" />'
-            +'		</div>'
-            +'		<div>'
-            +'			'+title+' <br/>'
-            +'			' + price
-            +'		</div>'
-            +'	</div>'
+                +'<div name="item" value="'+idx+'" class="row mb-3 text-center row-item">'
+                +'	<div class="col-md-4 themed-grid-col">'
+                +'		<img class="row-img" src="${ConfigUtil.getConfig("imgURL")}/thumbnail/'+thumbnail+'" />'
+                +'	</div>'
+                +'	<div class="col-md-8 themed-grid-col">'
+                +'		<div class="pb-3">'
+                +'			<strong>'+title+'</strong>'
+                +'		</div>'
+                +'		<div class="row">'
+                +'			<div class="col-md-6 themed-grid-col">'+onSale+'</div>'
+                +'			<div class="col-md-6 themed-grid-col">'+writeDate+'</div>'
+                +'		</div>'
+                +'		<div class="row">'
+                +'			<div class="col-md-6 themed-grid-col"></div>'
+                +'			<div class="col-md-6 themed-grid-col"><strong>'+price+' 원</strong></div>'
+                +'		</div>'
+                +'	</div>'
+                +'</div>'
             +'</a>';
         }
     </script>
