@@ -12,13 +12,19 @@
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
             <li class="nav-item"><a href="/app/v1/item/list" class="nav-link link-dark px-2">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
+            <%--<li class="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
             <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Pricing</a></li>
             <li class="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>--%>
         </ul>
         <ul class="nav">
             <c:if test="${loginInfo != null}">
+                <li class="nav-link link-secondary mt-sm-1 text-sm-end">
+                    <small>
+                    ${loginInfo.nickname}님 어서오세요!
+                    </small>
+                </li>
+
                 <li class="nav-item"><a href="/logout" class="nav-link link-dark px-2">Logout</a></li>
             </c:if>
             <c:if test="${loginInfo == null}">
