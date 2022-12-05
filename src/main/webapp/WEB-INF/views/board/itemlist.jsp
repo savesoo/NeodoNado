@@ -37,11 +37,11 @@
         <div class="container" id="itemListDiv">
             <h2 class="mt-4">너도나도 장터</h2>
             <p>중고 물품을 사고 팔아보세요</p>
-            <div class="container-lg themed-container text-center">　 </div>
-            <div class="container-lg themed-container text-center">　 </div>
+            <div class="container-lg">　 </div>
+            <div class="container-lg">　 </div>
             <c:forEach items="${itemList}" var="item">
                 <a href="/app/v1/item/${item.boardIdx}" class="aTag">
-                    <div name="item" class="row mb-3 text-center row-item">
+                    <div name="item" class="row mb-3 row-item">
                         <div class="col-md-4 ">
                             <c:if test="${item.thumbnail == ''}">
                                 <img class="row-img" src="/resources/files/default.jpg" />
@@ -50,9 +50,9 @@
                                 <img class="row-img" src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
                             </c:if>
                         </div>
-                        <div class="col-md-8 ">
+                        <div class="col-md-8 text-black">
                             <div class="pb-3">
-                                <strong>${item.title}</strong>
+                                <h3>${item.title}</h3>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 ">${item.onSale}</div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 "></div>
-                                <div class="col-md-6 "><strong>${item.price} 원</strong></div>
+                                <div class="col-md-6 text-danger text-lg-end"><strong>${item.price} 원</strong></div>
                             </div>
                         </div>
                     </div>
@@ -74,6 +74,8 @@
         <div class="addItem col-md-1">
             <a href="/app/v1/item" class="btn btn-secondary">　+　</a>
         </div>
+
+    <%@include file="/WEB-INF/views/parts/footer.jsp"%>
     </body>
 
     <script>
@@ -104,7 +106,7 @@
 
         function makeItemRow(idx, thumbnail, title, price, writeDate, onSale=1) {
             return '<a href="/app/v1/item/'+idx+'">'
-                +'<div name="item" value="'+idx+'" class="row mb-3 text-center row-item">'
+                +'<div name="item" value="'+idx+'" class="row mb-3 row-item">'
                 +'	<div class="col-md-4 ">'
                 +'		<img class="row-img" src="${ConfigUtil.getConfig("imgURL")}/thumbnail/'+thumbnail+'" />'
                 +'	</div>'

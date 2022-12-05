@@ -58,7 +58,7 @@
             <div class="col-sm-2 text-sm-end">
                 <div class="row">
                 <strong>${loginInfo.nickname}</strong>
-                <small><label id="commentByte"></label></small>
+                <small><label id="commentByte">0</label></small>
                 </div>
             </div>
             <div class="col-sm-8">
@@ -116,11 +116,23 @@
         }
 
         function makeCommentRow(nickname, content, writeDate, commentUserIdx, commentIdx) {
-            let deleteBtn = '<input type="button" value="삭제" onclick="deleteComment('+commentIdx+')"/>';
-            let appendTag = '<div>'+nickname+' / '+writeDate + ' ';
+            let deleteBtn = '<input type="button" value="삭제" class="delete-btn btn btn-outline-danger" onclick="deleteComment('+commentIdx+')"/>';
+            let appendTag = '<div class="col-sm-12" id="row-${comment.commentIdx}">'
+                +'	<div class="comment-row row">'
+                +'		<div class="col-md-2"></div>'
+                +'		<div class="col-md-8">'
+                +'			<strong>'+nickname+'</strong>'
+                +'			<small>'+writeDate+'</small>';
             appendTag += commentUserIdx == ${loginInfo.userIdx} ? deleteBtn : '';
-            appendTag += '</div>';
-            appendTag += '<div>'+content+'</div>';
+            appendTag += '		</div>'
+                +'		<div class="col-md-2"></div>'
+                +'		<div class="col-md-2"></div>'
+                +'		<div class="col-md-8">'
+                +'			<p class="card-text">'+content+'</p>'
+                +'		</div>'
+                +'		<div class="col-md-2"></div>'
+                +'	</div>'
+                +'</div>';
             return appendTag;
         }
 

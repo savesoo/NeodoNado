@@ -1,10 +1,9 @@
-#dropFileZone {
+.dropFileZone {
     background-color: #EEE;
-    border: #999 5px dashed;
-    width: 290px;
-    height: 200px;
+    border: #999 1px dashed;
+    width: 100%;
+    height: 100px;
     padding: 8px;
-    font-size: 18px;
 }
 #dragUploadFile {
     width:50%;

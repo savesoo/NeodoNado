@@ -84,6 +84,7 @@
     <hr/>
 </main>
 <%@include file="../comment/comment.jsp"%>
+<%@include file="/WEB-INF/views/parts/footer.jsp"%>
 </body>
 <script>
     let slideIndex = 1;
@@ -114,8 +115,6 @@
         slides[slideIndex-1].style.display = "block";
         dots[slideIndex-1].className += " active";
     }
-</script>
-<script>
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#updateItem').addEventListener('click', (event)=>{
             location.href='/app/v1/item/'+${item.boardIdx} + '/'+${loginInfo.userIdx};

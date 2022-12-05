@@ -11,42 +11,104 @@
     <head>
         <title>Title</title>
         <link rel="stylesheet" type="text/css" href="/resources/css/drop.css"/>
+        <style>
+            .mg-form {
+                margin-top:10px;
+                margin-bottom: 10px;
+            }
+        </style>
     </head>
     <body>
-        <form method="post" enctype="multipart/form-data">
-            <div id="dropFileZone" draggable="true" ondragover="return false" >
-                <div id="dragUploadFile">
-                    <p>Drop file(s) here</p>
-                    <p>or</p>
-                    <p><input type="button" value="Select File(s)" id="fileExplorer" /></p>
-                    <input type="file" id="selectFile" multiple name ="selectFile" accept=".gif, .png, .jpg"/>
+    <%@include file="/WEB-INF/views/parts/header.jsp"%>
+    <main>
+        <div class="container">
+            <div class="container-lg text-center">
+                <h2 class="mt-4">판매글 등록하기</h2>
+            </div>
+            <div class="container-lg">　 </div>
+            <div class="container-lg">　 </div>
+            <div class="container-lg">
+                <div id="dropFileZone" class="row" draggable="true" ondragover="return false" >
+                    <div id="dragUploadFile" class="col-sm-12">
+                        <select class="dropFileZone col-sm-12" name="fileList" id="fileList" disabled readonly multiple size="min-width:317px">
+                            <option>Drop file(s) here</option>
+                        </select>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <p><input type="button" class="btn btn-outline-secondary" value="Select File(s)" id="fileExplorer" /></p>
+                                <input type="file" id="selectFile" multiple name ="selectFile" accept=".gif, .png, .jpg"/>
+                            </div>
+                            <div class="col-sm-10 text-sm-end text-black-50">
+                                <label id="fileCnt">0</label> / 5
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
-        <form>
-            <div>
-                <select name="fileList" id="fileList" disabled readonly multiple size="min-width:317px"></select>
-                <div><label id="fileCnt">0</label> / 5</div>
-            </div>
+            <div class="container-lg">　 </div>
+            <div class="container-lg">　 </div>
             <input type="hidden" name="thumbnail" id="thumbnail">
-            <input type="text" name="title" id="title">
-            <input type="text" name="price" id="price">
-            <select name="category" id="category">
-                <c:forEach items="${itemCategory}" var="category">
-                    <option value="${category.key}">${category.value}</option>
-                </c:forEach>
-            </select>
-            <div>
-                <textarea name="content" id="content" cols="30" rows="10" style="resize: none;"></textarea>
-                <div>
-                    <label id="contentByte">0</label> / 300
-                </div>
+            <div class="mg-form col-lg-12">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-sm-2 text-lg-end"> <label for="title" class="form-label mt-sm-2">게시글 제목</label> </div>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="title" placeholder="게시글 제목을 입력하세요">
+                        </div>
+                    </div>
+                </fieldset>
             </div>
-            <input type="button" value="작성" id="itemSubmit">
-        </form>
+            <div class="mg-form col-lg-12">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-sm-2 text-lg-end">
+                            <label for="price" class="form-label mt-sm-2">판매 가격</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="price" name="price" placeholder="판매 금액">
+                        </div>
+                        <div class="col-sm-2 text-lg-end">
+                            <label for="price" class="form-label mt-sm-2">카테고리</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="category" class="form-control form-select" id="category">
+                                <c:forEach items="${itemCategory}" var="category">
+                                    <option value="${category.key}">${category.value}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="mg-form col-lg-12">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-sm-2 text-lg-end">
+                            <label for="content" class="form-label mt-sm-2">내용
+                                <br/>
+                                <small><label id="contentByte">0</label> / 300</small>
+                            </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea name="content" class="form-control" id="content" rows="3" style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="mg-form col-lg-12">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2">
+                            <input type="button" value="작성" id="itemSubmit" class="btn btn-outline-success" style="width: 100%; height:100%">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </main>
+        <%@include file="/WEB-INF/views/parts/footer.jsp"%>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/resources/js/drop.js"></script>
     <script src="/resources/js/textLenCheck.js"></script>
     <script>
