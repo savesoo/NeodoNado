@@ -79,6 +79,7 @@ public class UserLoginController {
         log.info(user);
 
         String rememberMe = req.getParameter("rememberMe");
+        log.info("remember" + rememberMe);
 
         if(rememberMe!=null && rememberMe.equals("on")){
 

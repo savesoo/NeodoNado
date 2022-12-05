@@ -41,7 +41,7 @@
 
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="rememberMe"> 다음부터 자동로그인
+                    <input type="checkbox" name="rememberMe"> 다음부터 자동로그인
                 </label>
             </div>
 
