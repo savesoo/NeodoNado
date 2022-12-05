@@ -19,12 +19,12 @@
 <%@include file="/WEB-INF/views/parts/header.jsp"%>
 <main>
     <div class="container">
-        <div class="container-lg themed-container text-center">
+        <div class="container-lg text-center">
             <h2 class="mt-4">${item.title}</h2>
         </div>
-        <div class="container-lg themed-container text-center">　 </div>
-        <div class="container-lg themed-container text-center">　 </div>
-        <div class="container-lg themed-container text-center">
+        <div class="container-lg text-center">　 </div>
+        <div class="container-lg text-center">　 </div>
+        <div class="container-lg text-center">
             <div class=" slideshow-container">
                 <c:if test="${item.imgURL == ''}">
                     <div class="mySlides fade">
@@ -53,15 +53,15 @@
         </div>
 
         <div class="container-md themed-container text-center" style="margin-top: 50px">
-            <div class="col-md-12 themed-grid-col">
+            <div class="col-md-12 ">
                 <div class="row">
-                    <div class="col-md-4 themed-grid-col">
+                    <div class="col-md-4 ">
                         <strong>${item.price} 원</strong>
                     </div>
-                    <div class="col-md-4 themed-grid-col">
+                    <div class="col-md-4 ">
                         <strong>${item.category}</strong>
                     </div>
-                    <div class="col-md-4 themed-grid-col">
+                    <div class="col-md-4 ">
                         <c:if test="${item.userIdx == loginInfo.userIdx}">
                             <input type="button" class="btn btn-outline-secondary" value="수정" id="updateItem"/>
                             <input type="button" class="btn btn-outline-danger" value="삭제" id="deleteItem"/>
@@ -69,18 +69,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 themed-grid-col" >
-                <div class="col-md-4 themed-grid-col">
+            <div class="col-md-12 " >
+                <div class="col-md-4 ">
                     ${item.onSale}
                 </div>
             </div>
         </div>
-        <div class="container-lg themed-container text-center">
-            <div class="col-md-12 themed-grid-col" >
+        <div class="container-lg text-center">
+            <div class="col-md-12 " style="margin-bottom: 50px">
                 <p>${item.content}</p>
             </div>
         </div>
     </div>
+    <hr/>
 </main>
 <%@include file="../comment/comment.jsp"%>
 </body>

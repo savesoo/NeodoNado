@@ -25,6 +25,11 @@
                 border: 1px solid #cccccc;
                 border-radius: 10px;
             }
+            .addItem {
+                position: fixed;
+                right: 15px;
+                bottom: 15px;
+            }
         </style>
     </head>
     <body>
@@ -37,7 +42,7 @@
             <c:forEach items="${itemList}" var="item">
                 <a href="/app/v1/item/${item.boardIdx}" class="aTag">
                     <div name="item" class="row mb-3 text-center row-item">
-                        <div class="col-md-4 themed-grid-col">
+                        <div class="col-md-4 ">
                             <c:if test="${item.thumbnail == ''}">
                                 <img class="row-img" src="/resources/files/default.jpg" />
                             </c:if>
@@ -45,24 +50,24 @@
                                 <img class="row-img" src="${ConfigUtil.getConfig("imgURL")}/thumbnail/${item.thumbnail}" />
                             </c:if>
                         </div>
-                        <div class="col-md-8 themed-grid-col">
+                        <div class="col-md-8 ">
                             <div class="pb-3">
                                 <strong>${item.title}</strong>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 themed-grid-col">${item.onSale}</div>
-                                <div class="col-md-6 themed-grid-col">${item.writeDate}</div>
+                                <div class="col-md-6 ">${item.onSale}</div>
+                                <div class="col-md-6 ">${item.writeDate}</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 themed-grid-col"></div>
-                                <div class="col-md-6 themed-grid-col"><strong>${item.price} 원</strong></div>
+                                <div class="col-md-6 "></div>
+                                <div class="col-md-6 "><strong>${item.price} 원</strong></div>
                             </div>
                         </div>
                     </div>
                 </a>
             </c:forEach>
         </div>
-        <div class="container-lg themed-container text-center">
+        <div class="container">
             <input type="hidden" id="lastItemIdx" value="${itemList.size() > 0 ? itemList[itemList.size()-1].boardIdx : 0}"/>
             <input type="button" id="nextItems" class="btn btn-outline-secondary" style="min-width: 100%" value="▼"/>
         </div>
@@ -100,20 +105,20 @@
         function makeItemRow(idx, thumbnail, title, price, writeDate, onSale=1) {
             return '<a href="/app/v1/item/'+idx+'">'
                 +'<div name="item" value="'+idx+'" class="row mb-3 text-center row-item">'
-                +'	<div class="col-md-4 themed-grid-col">'
+                +'	<div class="col-md-4 ">'
                 +'		<img class="row-img" src="${ConfigUtil.getConfig("imgURL")}/thumbnail/'+thumbnail+'" />'
                 +'	</div>'
-                +'	<div class="col-md-8 themed-grid-col">'
+                +'	<div class="col-md-8 ">'
                 +'		<div class="pb-3">'
                 +'			<strong>'+title+'</strong>'
                 +'		</div>'
                 +'		<div class="row">'
-                +'			<div class="col-md-6 themed-grid-col">'+onSale+'</div>'
-                +'			<div class="col-md-6 themed-grid-col">'+writeDate+'</div>'
+                +'			<div class="col-md-6 ">'+onSale+'</div>'
+                +'			<div class="col-md-6 ">'+writeDate+'</div>'
                 +'		</div>'
                 +'		<div class="row">'
-                +'			<div class="col-md-6 themed-grid-col"></div>'
-                +'			<div class="col-md-6 themed-grid-col"><strong>'+price+' 원</strong></div>'
+                +'			<div class="col-md-6 "></div>'
+                +'			<div class="col-md-6 "><strong>'+price+' 원</strong></div>'
                 +'		</div>'
                 +'	</div>'
                 +'</div>'
