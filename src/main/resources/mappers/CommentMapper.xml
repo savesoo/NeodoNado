@@ -53,4 +53,11 @@
         VALUES (#{boardIdx}, #{userIdx}, #{nickname}, #{content}, #{writeDate})
     </insert>
 
+    <!-- userIdx로 작성한 댓글 select -->
+    <select id="selectCommentByUserIdx" resultType="com.potato.nedonado.model.comment.CommentDTO">
+        SELECT *
+        FROM boardComment
+        WHERE userIdx=#{userIdx}
+    </select>
+
 </mapper>

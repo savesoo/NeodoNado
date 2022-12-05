@@ -86,7 +86,7 @@ public class UserLoginController {
             UUID uuid = UUID.randomUUID();
             log.info("uuid = " + uuid);
             Cookie c = new Cookie("uuid", uuid.toString());
-            c.setMaxAge(60*60*2);
+            c.setMaxAge(60*60*24*3);
             c.setPath("/");
             res.addCookie(c);
 
