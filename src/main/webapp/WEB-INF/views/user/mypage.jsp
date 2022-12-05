@@ -48,21 +48,21 @@
                     </c:if>
                 </div>
 
-                <div class="button-wrap mb-2 p-3">
+                <div class="button-wrap text-align: center m-auto mb-2 p-3">
                     <div class="p-3">
-                        <div class="d-grid gap-2 mb-3">
+                        <div class="w-100 d-grid gap-2 mb-3">
                             <a href="/user/edit" class="btn btn-primary col-md-6 btn-block" type="button">내 정보 수정</a>
                         </div>
-                        <div class="d-grid gap-2 mb-3">
+                        <div class="w-100 d-grid gap-2 mb-3">
                             <a href="/user/login" class="btn btn-primary col-md-6 btn-secondary p-1">이전 화면으로</a>
                         </div>
                     </div>
 
-                    <div class="mb-3 p-3">
+                    <div class="w-100 mb-3 p-3">
                         <div class="d-grid gap-2 mb-3">
                             <a href="/user/logout" class="btn btn-primary col-md-6 btn-danger" type="button">로그아웃</a>
                         </div>
-                        <div class="d-grid gap-2 mb-3">
+                        <div class="w-100 d-grid gap-2 mb-3">
                             <a class="btn btn-primary col-md-6 btn-dark p-1">내가 작성한 글</a>
                         </div>
                     </div>

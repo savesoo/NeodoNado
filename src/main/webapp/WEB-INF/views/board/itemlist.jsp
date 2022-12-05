@@ -35,9 +35,14 @@
                 </div>
             </c:forEach>
         </div>
-        <div>
+        <div class="m-5">
             <input type="hidden" id="lastItemIdx" value="${itemList.size() > 0 ? itemList[itemList.size()-1].boardIdx : 0}"/>
             <input type="button" id="nextItems" class="btn" value="▼"/>
+        </div>
+        <div class="m-5">
+            <input type="button" value="작성" id="insertItem"/>
+            <input type="button" value="수정" id="updateItem"/>
+            <input type="button" value="삭제" id="deleteItem"/>
         </div>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -12,6 +12,39 @@
 </head>
 <body>
 
+        <div class ="bir_wrap mb-2">
+          <label class="form-label mt-4 mb-3">생년월일</label>
+          <div class="bir_yy">
+            <span class="ps_box">
+                <input type="text" class="form-control" id="byear" name="byear" value="${user.byear!=0 ? user.byear : 0}">
+            </span>
+          </div>
+          <div class="bir_mm">
+              <span class="ps_box focus">
+                  <select class="form-select form-control" id="bmonth" name="bmonth" value="${user.bmonth!=0 ? 'selected' : ''}">
+                      <option>태어난 달(월)</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                   </select>
+              </span>
+            </div>
+            <div class="bir_dd">
+              <span class="ps_box">
+                  <input type ="text" class="form-control" id ="bday" name="bday" value="${user.bday!=0 ? user.bday : 0}">
+              </span>
+          </div>
+        </div>
+
 <h1>내 정보 수정</h1>
 <form method="post">
 <table>
