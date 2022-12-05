@@ -39,6 +39,7 @@
 
     <br>
 
+  <a class="btn btn-primary col-md-6 btn-dark" href="/user/myitemlist">내가 남긴 게시글</a>
   <a class="btn btn-primary col-md-6 btn-dark" href="/user/mypage">이전으로 돌아가기</a>
 
 </body>

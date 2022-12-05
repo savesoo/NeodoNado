@@ -63,7 +63,7 @@
                             <a href="/logout" class="btn btn-primary col-md-6 btn-danger" type="button">로그아웃</a>
                         </div>
                         <div class="w-100 d-grid gap-2 mb-3">
-                            <a class="btn btn-primary col-md-6 btn-dark p-1">내가 작성한 글</a>
+                            <a href="/user/myitemlist" class="btn btn-primary col-md-6 btn-dark p-1">내가 작성한 글</a>
                         </div>
                     </div>
                 </div>

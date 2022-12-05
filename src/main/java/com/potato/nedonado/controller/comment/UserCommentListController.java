@@ -32,10 +32,8 @@ public class UserCommentListController {
 
         log.info(" >>> get myComment Page >>> ");
 
-
         LoginInfo loginInfo = (LoginInfo) req.getSession().getAttribute("loginInfo");
         log.info("loginInfo = " + loginInfo);
-        //List<CommentViewInfo> list = userCommentListService.selectCommentByUserIdx(loginInfo.getUserIdx());
         model.addAttribute("myCommentList", userCommentListService.selectCommentByUserIdx(loginInfo.getUserIdx()));
 
     }

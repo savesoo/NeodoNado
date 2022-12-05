@@ -62,4 +62,14 @@
         WHERE boardIdx = #{boardIdx}
         AND userIdx = #{userIdx}
     </insert>
+    
+
+    <!-- userIdx로 작성한 게시글 select -->
+    <select id="selectItemListByUserIdx" resultType="com.potato.nedonado.model.board.ItemEntity">
+        SELECT *
+        FROM board
+        WHERE userIdx=#{userIdx}
+        ORDER BY boardIdx DESC
+    </select>
+
 </mapper>
