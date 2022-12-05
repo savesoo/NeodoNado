@@ -34,8 +34,9 @@
                         </select>
                         <div class="row">
                             <div class="col-sm-2">
-                                <p><input type="button" class="btn btn-outline-secondary" value="Select File(s)" id="fileExplorer" /></p>
+                                <p><input type="button" class="btn btn-outline-secondary" value="Select File(s)" id="fileExplorer" />
                                 <input type="file" id="selectFile" multiple name ="selectFile" accept=".gif, .png, .jpg"/>
+                                </p>
                             </div>
                             <div class="col-sm-10 text-sm-end text-black-50">
                                 <label id="fileCnt">0</label> / 5
