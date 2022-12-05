@@ -40,7 +40,7 @@ public class ItemEntity {
                 .price(price)
                 .onSale(onSale)
                 .thumbnail(thumbnail)
-                .writeDate(writeDate)
+                .writeDate(Util.convertLongTimestampToString(writeDate))
                 .build();
     }
 

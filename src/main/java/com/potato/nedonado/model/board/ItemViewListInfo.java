@@ -14,5 +14,5 @@ public class ItemViewListInfo {
     private String thumbnail;
     private int onSale;
     private int price;
-    private long writeDate;
+    private String writeDate;
 }

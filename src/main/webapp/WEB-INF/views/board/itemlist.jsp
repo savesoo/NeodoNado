@@ -56,7 +56,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 ">${item.onSale}</div>
-                                <div class="col-md-6 ">${item.writeDate}</div>
+                                <div class="col-md-6 text-black-50 text-md-end">${item.writeDate}</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 "></div>
