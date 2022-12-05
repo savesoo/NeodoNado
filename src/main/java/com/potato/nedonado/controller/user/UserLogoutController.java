@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Log4j2
 @Controller
-@RequestMapping("/user/logout")
+@RequestMapping("/logout")
 public class UserLogoutController {
 
     @GetMapping
@@ -27,7 +27,7 @@ public class UserLogoutController {
         cookie.setPath("/");
         res.addCookie(cookie);
 
-        return "redirect:/user/login";
+        return "redirect:/login";
 
     }
 

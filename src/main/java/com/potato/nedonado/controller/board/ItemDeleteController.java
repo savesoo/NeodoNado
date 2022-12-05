@@ -31,7 +31,7 @@ public class ItemDeleteController {
     ){
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
         if(loginInfo == null) {
-            return new ResponseEntity<>("/user/login", new HttpHeaders(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("/login", new HttpHeaders(), HttpStatus.BAD_REQUEST);
         }
 
         int result = service.deleteItemByBoardIdx(boardIdx, loginInfo.getUserIdx());

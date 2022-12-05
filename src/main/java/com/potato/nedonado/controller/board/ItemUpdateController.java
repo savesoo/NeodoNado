@@ -62,7 +62,7 @@ public class ItemUpdateController {
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
         if(loginInfo == null) {
             result.put("msg", "세션이 만료되었습니다.");
-            result.put("url", "/user/login");
+            result.put("url", "/login");
             return new ResponseEntity<>(result, httpHeaders, HttpStatus.OK);
         }
         log.info(loginInfo);

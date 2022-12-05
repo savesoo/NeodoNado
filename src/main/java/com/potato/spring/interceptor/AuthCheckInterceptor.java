@@ -24,7 +24,7 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
         }
 
         log.info(" >>> 비로그인 상태이므로 로그인 진행 >>> ");
-        response.sendRedirect("/user/login");
+        response.sendRedirect("/login");
         return false;
 
     }

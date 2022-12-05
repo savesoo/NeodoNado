@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Log4j2
 @Controller
-@RequestMapping("/user/login")
+@RequestMapping("/login")
 public class UserLoginController {
 
     private final UserLoginService userLoginService;
@@ -42,7 +42,7 @@ public class UserLoginController {
 
         }
 
-        return "user/login";
+        return "/user/login";
 
     }
 
@@ -59,7 +59,7 @@ public class UserLoginController {
 
         if(bindingResult.hasErrors()){
             log.info(bindingResult.getAllErrors());
-            return "redirect:user/login";
+            return "redirect:/login";
         }
 
         HttpSession session = req.getSession();
@@ -72,7 +72,7 @@ public class UserLoginController {
             String message="아이디 혹은 비밀번호가 일치하지 않습니다.";
             rttr.addFlashAttribute("loginFailMsg", message);
 
-            return "redirect:/user/login";
+            return "redirect:/login";
 
         }
 
@@ -96,9 +96,8 @@ public class UserLoginController {
         session.setAttribute("loginInfo", user.loginData());
 
 
-        return "redirect:/app/v1/item/list"; //최종반영
+        return "redirect:/app/v1/item/list";
 
-        //return "redirect:/user/mypage"; // 임시루트
 
     }
 

@@ -51,7 +51,7 @@
         </mvc:interceptor>
 
         <mvc:interceptor>
-            <mvc:mapping path="/user/mypage"/>
+            <mvc:mapping path="/user/**"/>
             <bean class="com.potato.spring.interceptor.AuthCheckInterceptor"/>
         </mvc:interceptor>
 

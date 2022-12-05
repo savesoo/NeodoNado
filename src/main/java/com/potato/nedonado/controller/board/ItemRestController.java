@@ -102,12 +102,12 @@ public class ItemRestController {
 
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
         if(loginInfo == null || userIdx != loginInfo.getUserIdx()) {
-            mav.setViewName("/user/login");
+            mav.setViewName("/login");
             return mav;
         }
         ItemEntity itemEntity = itemViewService.selectItemByIdxAndUserIdx(boardIdx, userIdx);
         if(itemEntity == null) {
-            mav.setViewName("/user/login");
+            mav.setViewName("/login");
             return mav;
         }
 
@@ -138,7 +138,7 @@ public class ItemRestController {
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
         if(loginInfo == null) {
             result.put("msg", "세션이 만료되었습니다.");
-            result.put("url", "/user/login");
+            result.put("url", "/login");
             return new ResponseEntity<>(result, httpHeaders, HttpStatus.OK);
         }
         log.info(loginInfo);
@@ -168,7 +168,7 @@ public class ItemRestController {
 
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
         if(loginInfo == null) {
-            return new ResponseEntity<>("/user/login", httpHeaders, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("/login", httpHeaders, HttpStatus.BAD_REQUEST);
         }
 
         log.info(loginInfo);
@@ -215,7 +215,7 @@ public class ItemRestController {
     ){
         LoginInfo loginInfo = (LoginInfo) request.getSession().getAttribute("loginInfo");
         if(loginInfo == null) {
-            return new ResponseEntity<>("/user/login", new HttpHeaders(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("/login", new HttpHeaders(), HttpStatus.BAD_REQUEST);
         }
 
         int result = itemDeleteService.deleteItemByBoardIdx(boardIdx, loginInfo.getUserIdx());

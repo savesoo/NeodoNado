@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Log4j2
-@WebFilter(filterName = "LoginCheckFilter", urlPatterns = {"/board/*"})
+@WebFilter(filterName = "LoginCheckFilter", urlPatterns = {"/app/v1/*"})
 public class LoginCheckFilter implements Filter {
 
     @Override
@@ -36,7 +36,7 @@ public class LoginCheckFilter implements Filter {
         if(session.getAttribute("loginInfo")==null){
 
             log.info(" >>> 비로그인 상태 -> 로그인 페이지로 이동 >>> ");
-            res.sendRedirect("/user/login");
+            res.sendRedirect("/login");
             return;
 
         }

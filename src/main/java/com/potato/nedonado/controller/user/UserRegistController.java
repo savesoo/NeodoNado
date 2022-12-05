@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 @Log4j2
 @Controller
-@RequestMapping("/user/register")
+@RequestMapping("/register")
 public class UserRegistController {
 
     private final UserRegistService userRegistService;
@@ -52,7 +52,7 @@ public class UserRegistController {
         String message = "회원가입이 완료되었습니다. 로그인을 진행해 주세요.";
         rttr.addFlashAttribute("regMsg", message);
 
-        return "redirect:/user/login";
+        return "redirect:/login";
 
     }
 }
